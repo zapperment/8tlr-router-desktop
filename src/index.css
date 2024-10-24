@@ -36,6 +36,10 @@ main {
   height: calc(100vh - var(--space) * 2);
 }
 
+.inactive {
+  opacity: 0.33;
+}
+
 .slot {
   background-repeat: no-repeat;
   background-position-x: left;
@@ -85,23 +89,65 @@ main {
 }
 
 .lamp-note {
-  background-color: var(--colour-lamp-note);
+  border: 1px solid var(--colour-lamp-note);
   border-radius: 0 0 0 var(--border-radius);
 }
 
+.lamp-note-lit {
+  background-color: var(--colour-lamp-note);
+}
+
 .lamp-cc {
+  border: 1px solid var(--colour-lamp-cc);
+}
+
+.lamp-cc-lit {
   background-color: var(--colour-lamp-cc);
 }
 
 .lamp-at {
+  border: 1px solid var(--colour-lamp-at);
+}
+
+.lamp-at-lit {
   background-color: var(--colour-lamp-at);
 }
 
 .lamp-pb {
+  border: 1px solid var(--colour-lamp-pb);
+}
+
+.lamp-pb-lit {
   background-color: var(--colour-lamp-pb);
 }
 
 .lamp-sketch {
+  border: 1px solid var(--colour-lamp-sketch);
+  border-radius: 0 0 var(--border-radius) 0;
+}
+
+.lamp-sketch-lit {
+  background-color: var(--colour-lamp-sketch);
+}
+
+.lamp-lit-note {
+  background-color: var(--colour-lamp-note);
+  border-radius: 0 0 0 var(--border-radius);
+}
+
+.lamp-lit-cc {
+  background-color: var(--colour-lamp-cc);
+}
+
+.lamp-lit-at {
+  background-color: var(--colour-lamp-at);
+}
+
+.lamp-lit-pb {
+  background-color: var(--colour-lamp-pb);
+}
+
+.lamp-lit-sketch {
   background-color: var(--colour-lamp-sketch);
   border-radius: 0 0 var(--border-radius) 0;
 }
