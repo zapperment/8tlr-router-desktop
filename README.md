@@ -1,4 +1,4 @@
-# 8trl-router-desktop
+# Eight Track LR Router
 
 _Routes MIDI messages from Ableton Live to Reason_
 
