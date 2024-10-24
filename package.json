@@ -2,7 +2,7 @@
   "name": "8tlr-router-desktop",
   "productName": "8tlr-router-desktop",
   "version": "1.0.0",
-  "description": "My Electron application description",
+  "description": "Routes MIDI messages from Ableton Live to Reason",
   "main": ".vite/build/main.js",
   "scripts": {
     "start": "electron-forge start",
@@ -33,7 +33,7 @@
   "keywords": [],
   "author": {
     "name": "Patrick Hund",
-    "email": "patrick.hund@adevinta.com"
+    "email": "hello@zapperment.rocks"
   },
   "license": "MIT",
   "packageManager": "yarn@1.22.21+sha1.1959a18351b811cdeedbd484a8f86c3cc3bbaf72",
