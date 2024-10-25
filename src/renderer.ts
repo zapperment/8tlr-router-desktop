@@ -27,3 +27,8 @@
  */
 
 import "./index.css";
+
+window.electronAPI.onMidiMessage((value) => {
+  console.debug("received MIDI message:", value);
+})
+

@@ -23,5 +23,7 @@ export function createMidiMessageHandler({
       routingResult;
 
     observeMessage(outputMidiMessage, outputPortIndex);
+
+    return routingResult;
   };
 }

@@ -19,10 +19,11 @@ if (require("electron-squirrel-startup")) {
 }
 
 const debug = createDebug("8tlr-router:main");
+let mainWindow = null;
 
 const createWindow = () => {
   // Create the browser window.
-  const mainWindow = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
     webPreferences: {
@@ -95,5 +96,8 @@ const midiMessageHandler = createMidiMessageHandler({
   observeMessage,
   portName,
 });
-input.on("message", midiMessageHandler);
+input.on("message", (...args) => {
+  midiMessageHandler(...args);
+  mainWindow.webContents.send("midi-message", "hello world!");
+});
 process.on("exit", handleExit);
