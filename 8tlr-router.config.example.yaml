@@ -1,0 +1,7 @@
+portName:
+  input: IAC Live to Router
+  output:
+    - IAC Router to Reason 1
+    - IAC Router to Reason 2
+    - IAC Router to Reason 3
+    - IAC Router to Reason 4

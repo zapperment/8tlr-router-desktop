@@ -1,10 +1,16 @@
 import { app, BrowserWindow } from "electron";
 import path from "path";
+import { readConfig } from "./file";
+import { configFileName } from "./constants";
+import createDebug from "debug";
+import process from "node:process";
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require("electron-squirrel-startup")) {
   app.quit();
 }
+
+const debug = createDebug("8tlr-router:main");
 
 const createWindow = () => {
   // Create the browser window.
@@ -55,3 +61,12 @@ app.on("activate", () => {
 
 // In this file, you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
+
+const config = readConfig();
+if (config === null) {
+  console.error(
+    `File ${configFileName} cannot be found or read, did you forget to create one?`,
+  );
+  process.exit(1);
+}
+debug(JSON.stringify(config, null, 2));
