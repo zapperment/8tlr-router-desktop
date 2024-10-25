@@ -10,9 +10,7 @@ interface MidiMessageRouterResult {
   outputMidiMessage: MidiMessage;
 }
 
-type MidiMessageRouter = (
-  midiMessage: MidiMessage,
-) => MidiMessageRouterResult | null;
+type MidiMessageRouter = (midiMessage: MidiMessage) => MidiMessageRouterResult | null;
 
 interface ProgramOptions {
   version?: boolean;
@@ -26,4 +24,10 @@ interface ConfigPortName {
 
 interface Config {
   portName: ConfigPortName;
+}
+
+interface Window {
+  electronAPI: {
+    onMidiMessage: (callback: (value: string) => void) => void;
+  };
 }

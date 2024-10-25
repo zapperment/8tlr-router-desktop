@@ -9,7 +9,6 @@ import {
   createMidiMessageRouter,
   createMidiMessageHandler,
   createExitHandler,
-  sendAllNotesOff,
 } from "./midi";
 import type { Input, Output } from "@julusian/midi";
 
@@ -19,7 +18,7 @@ if (require("electron-squirrel-startup")) {
 }
 
 const debug = createDebug("8tlr-router:main");
-let mainWindow = null;
+let mainWindow: BrowserWindow | null = null;
 
 const createWindow = () => {
   // Create the browser window.
