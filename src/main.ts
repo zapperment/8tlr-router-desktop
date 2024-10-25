@@ -4,6 +4,14 @@ import { readConfig } from "./file";
 import { configFileName } from "./constants";
 import createDebug from "debug";
 import process from "node:process";
+import {
+  initPort,
+  createMidiMessageRouter,
+  createMidiMessageHandler,
+  createExitHandler,
+  sendAllNotesOff,
+} from "./midi";
+import type { Input, Output } from "@julusian/midi";
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require("electron-squirrel-startup")) {
@@ -64,9 +72,28 @@ app.on("activate", () => {
 
 const config = readConfig();
 if (config === null) {
-  console.error(
-    `File ${configFileName} cannot be found or read, did you forget to create one?`,
-  );
+  console.error(`File ${configFileName} cannot be found or read, did you forget to create one?`);
   process.exit(1);
 }
+
 debug(JSON.stringify(config, null, 2));
+
+const { portName } = config;
+
+const outputs = portName.output.map((outputPortName) => {
+  debug(`Initialise output port ${outputPortName}`);
+  return initPort<Output>(outputPortName, "output");
+});
+
+debug(`Initialise input port ${portName.input}`);
+const input = initPort<Input>(portName.input, "input");
+
+const { handleExit, observeMessage } = createExitHandler({ input, outputs });
+const midiMessageRouter = createMidiMessageRouter({ outputs });
+const midiMessageHandler = createMidiMessageHandler({
+  midiMessageRouter,
+  observeMessage,
+  portName,
+});
+input.on("message", midiMessageHandler);
+process.on("exit", handleExit);

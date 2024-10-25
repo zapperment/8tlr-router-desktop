@@ -22,19 +22,22 @@
     "@electron-forge/plugin-fuses": "^7.5.0",
     "@electron-forge/plugin-vite": "^7.5.0",
     "@electron/fuses": "^1.8.0",
+    "@types/debug": "^4",
     "@types/node": "^22.7.9",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",
+    "@vitest/coverage-v8": "^2.1.2",
     "electron": "33.0.2",
     "eslint": "^8.0.1",
     "eslint-plugin-import": "^2.25.0",
+    "globals": "^15.9.0",
     "prettier": "^3.3.3",
+    "rollup-plugin-copy": "^3.5.0",
     "ts-node": "^10.0.0",
     "typescript": "~4.5.4",
     "vite": "^5.0.12",
-    "vitest": "^2.1.1",
-    "@vitest/coverage-v8": "^2.1.2",
-    "globals": "^15.9.0"
+    "vite-plugin-static-copy": "^2.0.0",
+    "vitest": "^2.1.1"
   },
   "keywords": [],
   "author": {
@@ -44,8 +47,12 @@
   "license": "MIT",
   "packageManager": "yarn@1.22.21+sha1.1959a18351b811cdeedbd484a8f86c3cc3bbaf72",
   "dependencies": {
+    "@julusian/midi": "^3.6.1",
     "debug": "^4.3.7",
     "electron-squirrel-startup": "^1.0.1",
     "yaml": "^2.6.0"
+  },
+  "overrides": {
+    "node-gyp": "10.2.0"
   }
 }
