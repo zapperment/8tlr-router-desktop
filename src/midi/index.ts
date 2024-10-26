@@ -7,3 +7,7 @@ export { initPort } from "./initPort";
 export { isControlChange } from "./isControlChange";
 export { isSketchSwitch } from "./isSketchSwitch";
 export { sendAllNotesOff } from "./sendAllNotesOff";
+export { isAfterTouch } from "./isAfterTouch";
+export { isNoteOn } from "./isNoteOn";
+export { isNoteOff } from "./isNoteOff";
+export { isPitchBend } from "./isPitchBend";

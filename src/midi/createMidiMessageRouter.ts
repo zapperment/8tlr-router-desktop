@@ -18,33 +18,27 @@ export function createMidiMessageRouter({ outputs }: Args): MidiMessageRouter {
     const outputMidiMessage: MidiMessage = [...inputMidiMessage];
     const inputChannel = getMidiChannel(inputMidiMessage);
     if (inputChannel > 7) {
-      debug(
-        `Invalid data - received MIDI message on channel ${inputChannel + 1}`,
-      );
+      debug(`Invalid data - received MIDI message on channel ${inputChannel + 1}`);
       return null;
     }
 
-    if (isSketchSwitch(inputMidiMessage)) {
+    const isSketchSwitchMessage = isSketchSwitch(inputMidiMessage);
+    if (isSketchSwitchMessage) {
       selectedOutputIndices[inputChannel] = Math.floor(inputMidiMessage[2] / 2);
       shiftChannel[inputChannel] = inputMidiMessage[2] % 2 !== 0;
-      debug(
-        `Sketch switch ${inputMidiMessage[2] + 1}: out=${selectedOutputIndices} / shift=${shiftChannel}`,
-      );
-      return null;
+      debug(`Sketch switch ${inputMidiMessage[2] + 1}: out=${selectedOutputIndices} / shift=${shiftChannel}`);
     }
-    let outputChannel = inputChannel;
     if (shiftChannel[inputChannel]) {
       outputMidiMessage[0] += 8;
-      outputChannel += 8;
     }
     const outputPortIndex = selectedOutputIndices[inputChannel];
     debug(`Output port index: ${outputPortIndex}`);
-    outputs[outputPortIndex].sendMessage(outputMidiMessage);
+    if (!isSketchSwitchMessage) {
+      outputs[outputPortIndex].sendMessage(outputMidiMessage);
+    }
 
     return {
-      inputChannel,
       outputPortIndex,
-      outputChannel,
       outputMidiMessage,
     };
   };

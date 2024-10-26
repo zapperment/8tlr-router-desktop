@@ -28,6 +28,27 @@
 
 import "./index.css";
 
-window.electronAPI.onMidiMessage((value: string) => {
-  console.debug("received MIDI message:", value);
+window.electronAPI.onUiUpdate((uiUpdate: UiUpdate) => {
+  const { type, track, sketch } = uiUpdate;
+  console.log("type:", type);
+  console.log("track:", track);
+  console.log("sketch:", sketch);
+  if (type === "sketch") {
+    for (let currSketch = 1; currSketch <= 8; currSketch++) {
+      const elements = [];
+      elements.push(document.getElementById(`slot-${track}-reason-${currSketch}`));
+      elements.push(document.getElementById(`lamp-${track}-reason-${currSketch}-note`));
+      elements.push(document.getElementById(`lamp-${track}-reason-${currSketch}-cc`));
+      elements.push(document.getElementById(`lamp-${track}-reason-${currSketch}-at`));
+      elements.push(document.getElementById(`lamp-${track}-reason-${currSketch}-pb`));
+      elements.push(document.getElementById(`lamp-${track}-reason-${currSketch}-sketch`));
+      for (const element of elements) {
+        if (currSketch === sketch) {
+          element.classList.remove("inactive");
+        } else {
+          element.classList.add("inactive");
+        }
+      }
+    }
+  }
 });

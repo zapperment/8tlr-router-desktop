@@ -4,13 +4,9 @@ import { readConfig } from "./file";
 import { configFileName } from "./constants";
 import createDebug from "debug";
 import process from "node:process";
-import {
-  initPort,
-  createMidiMessageRouter,
-  createMidiMessageHandler,
-  createExitHandler,
-} from "./midi";
+import { initPort, createMidiMessageRouter, createMidiMessageHandler, createExitHandler } from "./midi";
 import type { Input, Output } from "@julusian/midi";
+import { createUiUpdater } from "./ui";
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require("electron-squirrel-startup")) {
@@ -20,7 +16,7 @@ if (require("electron-squirrel-startup")) {
 const debug = createDebug("8tlr-router:main");
 let mainWindow: BrowserWindow | null = null;
 
-const createWindow = () => {
+const createWindow = async () => {
   // Create the browser window.
   mainWindow = new BrowserWindow({
     width: 800,
@@ -32,17 +28,15 @@ const createWindow = () => {
 
   // and load the index.html of the app.
   if (MAIN_WINDOW_VITE_DEV_SERVER_URL) {
-    mainWindow.loadURL(MAIN_WINDOW_VITE_DEV_SERVER_URL).then(() => {
-      // intentional noop
-    });
+    await mainWindow.loadURL(MAIN_WINDOW_VITE_DEV_SERVER_URL);
   } else {
-    mainWindow.loadFile(path.join(__dirname, `../renderer/${MAIN_WINDOW_VITE_NAME}/index.html`)).then(() => {
-      // intentional noop
-    });
+    await mainWindow.loadFile(path.join(__dirname, `../renderer/${MAIN_WINDOW_VITE_NAME}/index.html`));
   }
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
+
+  startRouter();
 };
 
 // This method will be called when Electron has finished
@@ -88,15 +82,16 @@ const outputs = portName.output.map((outputPortName) => {
 debug(`Initialise input port ${portName.input}`);
 const input = initPort<Input>(portName.input, "input");
 
-const { handleExit, observeMessage } = createExitHandler({ input, outputs });
-const midiMessageRouter = createMidiMessageRouter({ outputs });
-const midiMessageHandler = createMidiMessageHandler({
-  midiMessageRouter,
-  observeMessage,
-  portName,
-});
-input.on("message", (...args) => {
-  midiMessageHandler(...args);
-  mainWindow.webContents.send("midi-message", "hello world!");
-});
-process.on("exit", handleExit);
+function startRouter() {
+  const { handleExit, observeMessage } = createExitHandler({ input, outputs });
+  const midiMessageRouter = createMidiMessageRouter({ outputs });
+  const uiUpdater = createUiUpdater(mainWindow);
+  const midiMessageHandler = createMidiMessageHandler({
+    midiMessageRouter,
+    observeMessage,
+    uiUpdater,
+  });
+
+  input.on("message", midiMessageHandler);
+  process.on("exit", handleExit);
+}

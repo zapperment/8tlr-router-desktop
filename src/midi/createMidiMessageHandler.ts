@@ -5,23 +5,19 @@ const debug = createDebug("8tlr-router:midi:midiMessageHandler");
 
 interface Args {
   midiMessageRouter: MidiMessageRouter;
-  observeMessage: (MidiMessage: MidiMessage, portIndex: number) => void;
-  portName: ConfigPortName;
+  observeMessage: (midiMessage: MidiMessage, portIndex: number) => void;
+  uiUpdater: (midiMessage: MidiMessage, portIndex: number) => void;
 }
 
-export function createMidiMessageHandler({
-  midiMessageRouter,
-  observeMessage,
-  portName,
-}: Args) {
+export function createMidiMessageHandler({ midiMessageRouter, observeMessage, uiUpdater }: Args) {
   return (_: number, midiMessage: MidiMessage) => {
     const routingResult = midiMessageRouter(midiMessage);
     if (routingResult === null) {
       return;
     }
-    const { inputChannel, outputPortIndex, outputChannel, outputMidiMessage } =
-      routingResult;
+    const { outputPortIndex, outputMidiMessage } = routingResult;
 
+    uiUpdater(outputMidiMessage, outputPortIndex);
     observeMessage(outputMidiMessage, outputPortIndex);
 
     return routingResult;

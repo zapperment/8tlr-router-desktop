@@ -3,10 +3,18 @@
 declare const MAIN_WINDOW_VITE_DEV_SERVER_URL: string;
 declare const MAIN_WINDOW_VITE_NAME: string;
 
+type TrackName = "fhyd" | "tang" | "duri" | "poml" | "tiff" | "coco" | "plum" | "flam";
+type MidiMessageType = "note-on" | "note-off" | "cc" | "at" | "pb" | "sketch";
+type Sketch = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+
+interface UiUpdate {
+  type: MidiMessageType;
+  track: TrackName;
+  sketch: Sketch;
+}
+
 interface MidiMessageRouterResult {
-  inputChannel: number;
   outputPortIndex: number;
-  outputChannel: number;
   outputMidiMessage: MidiMessage;
 }
 
@@ -28,6 +36,6 @@ interface Config {
 
 interface Window {
   electronAPI: {
-    onMidiMessage: (callback: (value: string) => void) => void;
+    onUiUpdate: (callback: (value: UiUpdate) => void) => void;
   };
 }
