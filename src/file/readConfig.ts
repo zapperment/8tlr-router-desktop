@@ -4,17 +4,19 @@ import createDebug from "debug";
 import { parse } from "yaml";
 import { readFileSync } from "node:fs";
 import { isValidConfig } from "./isValidConfig";
+import { homedir } from "node:os";
 
 const debug = createDebug("8tlr-router:file:readConfig");
 
 export function readConfig(): Config | null {
   const startDir = process.cwd();
-  debug(`Start dir: ${startDir}`)
-  const configFilePath = findFile(startDir, configFileName);
+  debug(`Start dir: ${startDir}`);
+  let configFilePath = findFile(startDir, configFileName);
+  if (configFilePath === null){
+    configFilePath = findFile(homedir(), configFileName);
+  }
   if (configFilePath === null) {
-    debug(
-      `Failed to find config file ${configFileName} starting at path ${startDir}`,
-    );
+    debug(`Failed to find config file ${configFileName} starting at path ${startDir}`);
     return null;
   }
   let rawConfig: string;

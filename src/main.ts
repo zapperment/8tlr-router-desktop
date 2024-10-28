@@ -8,11 +8,6 @@ import { initPort, createMidiMessageRouter, createMidiMessageHandler, createExit
 import type { Input, Output } from "@julusian/midi";
 import { createUiUpdater } from "./ui";
 
-// Handle creating/removing shortcuts on Windows when installing/uninstalling.
-if (require("electron-squirrel-startup")) {
-  app.quit();
-}
-
 const debug = createDebug("8tlr-router:main");
 let mainWindow: BrowserWindow | null = null;
 
