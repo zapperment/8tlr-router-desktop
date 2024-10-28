@@ -14,6 +14,6 @@ export function createUiUpdater(browserWindow: BrowserWindow) {
     }
     const track = getTrackName(midiMessage);
     const sketch = getSketch(midiMessage, portIndex);
-    browserWindow.webContents.send("ui-update", { type, track, sketch });
+    browserWindow.webContents.send("ui-update", { type, track, sketch, value: midiMessage[1] });
   };
 }

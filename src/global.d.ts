@@ -11,6 +11,7 @@ interface UiUpdate {
   type: MidiMessageType;
   track: TrackName;
   sketch: Sketch;
+  value: number;
 }
 
 interface MidiMessageRouterResult {

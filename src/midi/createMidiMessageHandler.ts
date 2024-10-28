@@ -1,7 +1,4 @@
 import type { MidiMessage } from "@julusian/midi";
-import createDebug from "debug";
-
-const debug = createDebug("8tlr-router:midi:midiMessageHandler");
 
 interface Args {
   midiMessageRouter: MidiMessageRouter;

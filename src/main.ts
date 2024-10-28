@@ -19,6 +19,7 @@ let mainWindow: BrowserWindow | null = null;
 const createWindow = async () => {
   // Create the browser window.
   mainWindow = new BrowserWindow({
+    title: "Eight Track LR Router",
     width: 800,
     height: 600,
     webPreferences: {

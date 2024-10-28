@@ -44,8 +44,6 @@ describe("The router function created by createMidiMessageRouter", () => {
       it("returns the correct result", () => {
         expect(result).toMatchInlineSnapshot(`
           {
-            "inputChannel": 0,
-            "outputChannel": 0,
             "outputMidiMessage": [
               144,
               48,
@@ -86,8 +84,17 @@ describe("The router function created by createMidiMessageRouter", () => {
         "Sketch switch 2: out=0,0,0,0,0,0,0,0 / shift=true,false,false,false,false,false,false,false",
       );
     });
-    it("returns null", () => {
-      expect(result).toBeNull();
+    it("returns the correct result", () => {
+      expect(result).toMatchInlineSnapshot(`
+        {
+          "outputMidiMessage": [
+            184,
+            119,
+            1,
+          ],
+          "outputPortIndex": 0,
+        }
+      `);
     });
     describe("and then receives a MIDI message on channel 1", () => {
       beforeEach(() => {
@@ -103,8 +110,6 @@ describe("The router function created by createMidiMessageRouter", () => {
       it("returns the correct result", () => {
         expect(result).toMatchInlineSnapshot(`
           {
-            "inputChannel": 0,
-            "outputChannel": 8,
             "outputMidiMessage": [
               152,
               48,
@@ -127,8 +132,17 @@ describe("The router function created by createMidiMessageRouter", () => {
         "Sketch switch 3: out=1,0,0,0,0,0,0,0 / shift=false,false,false,false,false,false,false,false",
       );
     });
-    it("returns null", () => {
-      expect(result).toBeNull();
+    it("returns the correct result", () => {
+      expect(result).toMatchInlineSnapshot(`
+        {
+          "outputMidiMessage": [
+            176,
+            119,
+            2,
+          ],
+          "outputPortIndex": 1,
+        }
+      `)
     });
     describe("and then receives a MIDI message on channel 1", () => {
       beforeEach(() => {
@@ -140,8 +154,6 @@ describe("The router function created by createMidiMessageRouter", () => {
       it("returns the correct result", () => {
         expect(result).toMatchInlineSnapshot(`
           {
-            "inputChannel": 0,
-            "outputChannel": 0,
             "outputMidiMessage": [
               144,
               48,

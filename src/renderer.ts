@@ -27,28 +27,24 @@
  */
 
 import "./index.css";
+import { createNoteUpdater, updateSketch } from "./frontend";
+
+const updateNote = createNoteUpdater();
 
 window.electronAPI.onUiUpdate((uiUpdate: UiUpdate) => {
-  const { type, track, sketch } = uiUpdate;
+  const { type, track, sketch, value } = uiUpdate;
   console.log("type:", type);
   console.log("track:", track);
   console.log("sketch:", sketch);
-  if (type === "sketch") {
-    for (let currSketch = 1; currSketch <= 8; currSketch++) {
-      const elements = [];
-      elements.push(document.getElementById(`slot-${track}-reason-${currSketch}`));
-      elements.push(document.getElementById(`lamp-${track}-reason-${currSketch}-note`));
-      elements.push(document.getElementById(`lamp-${track}-reason-${currSketch}-cc`));
-      elements.push(document.getElementById(`lamp-${track}-reason-${currSketch}-at`));
-      elements.push(document.getElementById(`lamp-${track}-reason-${currSketch}-pb`));
-      elements.push(document.getElementById(`lamp-${track}-reason-${currSketch}-sketch`));
-      for (const element of elements) {
-        if (currSketch === sketch) {
-          element.classList.remove("inactive");
-        } else {
-          element.classList.add("inactive");
-        }
-      }
-    }
+  console.log("value:", value);
+  switch (type) {
+    case "sketch":
+      updateSketch(uiUpdate);
+      break;
+    case "note-on":
+    case "note-off":
+      updateNote(uiUpdate);
+      break;
+    default:
   }
 });
