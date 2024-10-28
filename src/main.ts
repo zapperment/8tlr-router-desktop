@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from "electron";
+import { app, dialog, BrowserWindow } from "electron";
 import path from "path";
 import { readConfig } from "./file";
 import { configFileName } from "./constants";
@@ -35,7 +35,7 @@ const createWindow = async () => {
   }
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools();
+  // mainWindow.webContents.openDevTools();
 
   startRouter();
 };
@@ -66,8 +66,11 @@ app.on("activate", () => {
 // code. You can also put them in separate files and import them here.
 
 const config = readConfig();
+
 if (config === null) {
-  console.error(`File ${configFileName} cannot be found or read, did you forget to create one?`);
+  const message = `File ${configFileName} cannot be found or read, did you forget to create one?`;
+  console.error(message);
+  dialog.showErrorBox("Configuration file missing", message);
   process.exit(1);
 }
 
@@ -75,13 +78,21 @@ debug(JSON.stringify(config, null, 2));
 
 const { portName } = config;
 
-const outputs = portName.output.map((outputPortName) => {
-  debug(`Initialise output port ${outputPortName}`);
-  return initPort<Output>(outputPortName, "output");
-});
+let outputs:Output[];
+let input :Input;
+try {
+  outputs = portName.output.map((outputPortName) => {
+    debug(`Initialise output port ${outputPortName}`);
+    return initPort<Output>(outputPortName, "output");
+  });
 
-debug(`Initialise input port ${portName.input}`);
-const input = initPort<Input>(portName.input, "input");
+  debug(`Initialise input port ${portName.input}`);
+  input = initPort<Input>(portName.input, "input");
+} catch (error){
+  console.error(error.message);
+  dialog.showErrorBox("MIDI port not found", error.message);
+  process.exit(1);
+}
 
 function startRouter() {
   const { handleExit, observeMessage } = createExitHandler({ input, outputs });

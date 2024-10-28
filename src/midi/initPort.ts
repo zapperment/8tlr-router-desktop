@@ -1,12 +1,8 @@
 import midi from "@julusian/midi";
 import type { Input, Output } from "@julusian/midi";
-import { withFatalErrorOnNull } from "../utils";
 import { getPortIndex } from "./getPortIndex";
 
-export function initPort<T extends Input | Output>(
-  portName: string,
-  portType: "input" | "output",
-): T {
+export function initPort<T extends Input | Output>(portName: string, portType: "input" | "output"): T {
   let midiInterface: T;
 
   if (portType === "input") {
@@ -15,9 +11,10 @@ export function initPort<T extends Input | Output>(
     midiInterface = new midi.Output() as T;
   }
 
-  const portIndex = withFatalErrorOnNull<number>(
-    `MIDI ${portType} port ${portName} not found`,
-  )(() => getPortIndex(midiInterface, portName));
+  const portIndex = getPortIndex(midiInterface, portName);
+  if (portIndex === null) {
+    throw new Error(`MIDI ${portType} port ${portName} not found`);
+  }
 
   midiInterface.openPort(portIndex);
 
