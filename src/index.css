@@ -11,7 +11,6 @@
   --colour-lamp-cc: pink;
   --colour-lamp-at: yellow;
   --colour-lamp-pb: aqua;
-  --colour-lamp-sketch: red;
   --space: 0.33em;
   --border-radius: 0.75em;
   --icon-live: url('data:image/svg+xml,<%3Fxml version="1.0" encoding="UTF-8"%3F><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 45 25"><defs><style> .cls-1 { mix-blend-mode: hard-light; opacity: .5; } .cls-2 { isolation: isolate; } .cls-3 { fill: %23f2f2f2; fill-rule: evenodd; } .cls-4 { mix-blend-mode: luminosity; } </style></defs><g class="cls-2"><g id="Ebene_1" data-name="Ebene 1"><g id="Live_FHYD" data-name="Live FHYD"><g id="app-icon-live" class="cls-4"><g class="cls-1"><path class="cls-3" d="M5.14,21.71c0,.17-.14.29-.29.29h-2.04c-.17,0-.31-.12-.31-.29V3.29c0-.12.14-.26.31-.26h2.04c.14,0,.29.14.29.26v18.42h0ZM10.48,21.71c0,.17-.14.29-.29.29h-2.04c-.17,0-.31-.12-.31-.29V3.29c0-.12.14-.26.31-.26h2.04c.14,0,.29.14.29.26v18.42h0ZM15.83,21.71c0,.17-.14.29-.29.29h-2.04c-.17,0-.31-.12-.31-.29V3.29c0-.12.14-.26.31-.26h2.04c.14,0,.29.14.29.26v18.42ZM21.19,21.71c0,.17-.14.29-.28.29h-2.04c-.17,0-.31-.12-.31-.29V3.29c0-.12.14-.26.31-.26h2.04c.14,0,.28.14.28.26v18.42ZM42.22,3c.17,0,.28.15.28.29v2.08c0,.17-.12.31-.28.31h-18.12c-.12,0-.26-.14-.26-.31v-2.08c0-.14.14-.29.26-.29,0,0,18.12,0,18.12,0ZM42.22,8.46c.17,0,.28.15.28.29v2.08c0,.17-.12.31-.28.31h-18.12c-.12,0-.26-.15-.26-.31v-2.08c0-.15.14-.29.26-.29h18.12ZM42.22,13.89c.17,0,.28.14.28.29v2.08c0,.17-.12.32-.28.32h-18.12c-.12,0-.26-.14-.26-.32v-2.08c0-.15.14-.29.26-.29h18.12ZM42.22,19.32c.17,0,.28.15.28.29v2.08c0,.17-.12.31-.28.31h-18.12c-.12,0-.26-.14-.26-.31v-2.08c0-.14.14-.29.26-.29h18.12Z"/></g></g></g></g></g></svg>');
@@ -58,7 +57,7 @@ body {
 
 main {
   display: grid;
-  grid-template-columns: repeat(40, 1fr);
+  grid-template-columns: repeat(32, 1fr);
   grid-template-rows: repeat(9, 3fr 1fr);
   grid-column-gap: var(--space);
   grid-row-gap: var(--space);
@@ -196,19 +195,11 @@ main {
 
 .lamp-pb {
   border: 1px solid var(--colour-lamp-pb);
+  border-radius: 0 0 var(--border-radius) 0;
 }
 
 .lamp-pb-lit {
   background-color: var(--colour-lamp-pb);
-}
-
-.lamp-sketch {
-  border: 1px solid var(--colour-lamp-sketch);
-  border-radius: 0 0 var(--border-radius) 0;
-}
-
-.lamp-sketch-lit {
-  background-color: var(--colour-lamp-sketch);
 }
 
 .lamp-lit-note {
@@ -226,10 +217,6 @@ main {
 
 .lamp-lit-pb {
   background-color: var(--colour-lamp-pb);
-}
-
-.lamp-lit-sketch {
-  background-color: var(--colour-lamp-sketch);
   border-radius: 0 0 var(--border-radius) 0;
 }
 
@@ -240,35 +227,35 @@ main {
 /* row 1: Live slots */
 
 #slot-fhyd-live {
-  grid-area: 1 / 1 / 2 / 6;
+  grid-area: 1 / 1 / 2 / 5;
 }
 
 #slot-tang-live {
-  grid-area: 1 / 6 / 2 / 11;
+  grid-area: 1 / 5 / 2 / 9;
 }
 
 #slot-duri-live {
-  grid-area: 1 / 11 / 2 / 16;
+  grid-area: 1 / 9 / 2 / 13;
 }
 
 #slot-poml-live {
-  grid-area: 1 / 16 / 2 / 21;
+  grid-area: 1 / 13 / 2 / 17;
 }
 
 #slot-tiff-live {
-  grid-area: 1 / 21 / 2 / 26;
+  grid-area: 1 / 17 / 2 / 21;
 }
 
 #slot-coco-live {
-  grid-area: 1 / 26 / 2 / 31;
+  grid-area: 1 / 21 / 2 / 25;
 }
 
 #slot-plum-live {
-  grid-area: 1 / 31 / 2 / 36;
+  grid-area: 1 / 25 / 2 / 29;
 }
 
 #slot-flam-live {
-  grid-area: 1 / 36 / 2 / 41;
+  grid-area: 1 / 29 / 2 / 33;
 }
 
 /* row 2: Live lamps */
@@ -287,182 +274,150 @@ main {
 #lamp-fhyd-live-pb {
   grid-area: 2 / 4 / 3 / 5;
 }
-#lamp-fhyd-live-sketch {
+#lamp-tang-live-note {
   grid-area: 2 / 5 / 3 / 6;
 }
 
-#lamp-tang-live-note {
+#lamp-tang-live-cc {
   grid-area: 2 / 6 / 3 / 7;
 }
 
-#lamp-tang-live-cc {
+#lamp-tang-live-at {
   grid-area: 2 / 7 / 3 / 8;
 }
 
-#lamp-tang-live-at {
+#lamp-tang-live-pb {
   grid-area: 2 / 8 / 3 / 9;
 }
 
-#lamp-tang-live-pb {
+#lamp-duri-live-note {
   grid-area: 2 / 9 / 3 / 10;
 }
 
-#lamp-tang-live-sketch {
+#lamp-duri-live-cc {
   grid-area: 2 / 10 / 3 / 11;
 }
 
-#lamp-duri-live-note {
+#lamp-duri-live-at {
   grid-area: 2 / 11 / 3 / 12;
 }
 
-#lamp-duri-live-cc {
+#lamp-duri-live-pb {
   grid-area: 2 / 12 / 3 / 13;
 }
 
-#lamp-duri-live-at {
+#lamp-poml-live-note {
   grid-area: 2 / 13 / 3 / 14;
 }
 
-#lamp-duri-live-pb {
+#lamp-poml-live-cc {
   grid-area: 2 / 14 / 3 / 15;
 }
 
-#lamp-duri-live-sketch {
+#lamp-poml-live-at {
   grid-area: 2 / 15 / 3 / 16;
 }
 
-#lamp-poml-live-note {
+#lamp-poml-live-pb {
   grid-area: 2 / 16 / 3 / 17;
 }
 
-#lamp-poml-live-cc {
+#lamp-tiff-live-note {
   grid-area: 2 / 17 / 3 / 18;
 }
 
-#lamp-poml-live-at {
+#lamp-tiff-live-cc {
   grid-area: 2 / 18 / 3 / 19;
 }
 
-#lamp-poml-live-pb {
+#lamp-tiff-live-at {
   grid-area: 2 / 19 / 3 / 20;
 }
 
-#lamp-poml-live-sketch {
+#lamp-tiff-live-pb {
   grid-area: 2 / 20 / 3 / 21;
 }
 
-#lamp-tiff-live-note {
+#lamp-coco-live-note {
   grid-area: 2 / 21 / 3 / 22;
 }
 
-#lamp-tiff-live-cc {
+#lamp-coco-live-cc {
   grid-area: 2 / 22 / 3 / 23;
 }
 
-#lamp-tiff-live-at {
+#lamp-coco-live-at {
   grid-area: 2 / 23 / 3 / 24;
 }
 
-#lamp-tiff-live-pb {
+#lamp-coco-live-pb {
   grid-area: 2 / 24 / 3 / 25;
 }
 
-#lamp-tiff-live-sketch {
+#lamp-plum-live-note {
   grid-area: 2 / 25 / 3 / 26;
 }
 
-#lamp-coco-live-note {
+#lamp-plum-live-cc {
   grid-area: 2 / 26 / 3 / 27;
 }
 
-#lamp-coco-live-cc {
+#lamp-plum-live-at {
   grid-area: 2 / 27 / 3 / 28;
 }
 
-#lamp-coco-live-at {
+#lamp-plum-live-pb {
   grid-area: 2 / 28 / 3 / 29;
 }
 
-#lamp-coco-live-pb {
+#lamp-flam-live-note {
   grid-area: 2 / 29 / 3 / 30;
 }
 
-#lamp-coco-live-sketch {
+#lamp-flam-live-cc {
   grid-area: 2 / 30 / 3 / 31;
 }
 
-#lamp-plum-live-note {
+#lamp-flam-live-at {
   grid-area: 2 / 31 / 3 / 32;
 }
 
-#lamp-plum-live-cc {
-  grid-area: 2 / 32 / 3 / 33;
-}
-
-#lamp-plum-live-at {
-  grid-area: 2 / 33 / 3 / 34;
-}
-
-#lamp-plum-live-pb {
-  grid-area: 2 / 34 / 3 / 35;
-}
-
-#lamp-plum-live-sketch {
-  grid-area: 2 / 35 / 3 / 36;
-}
-
-#lamp-flam-live-note {
-  grid-area: 2 / 36 / 3 / 37;
-}
-
-#lamp-flam-live-cc {
-  grid-area: 2 / 37 / 3 / 38;
-}
-
-#lamp-flam-live-at {
-  grid-area: 2 / 38 / 3 / 39;
-}
-
 #lamp-flam-live-pb {
-  grid-area: 2 / 39 / 3 / 40;
-}
-
-#lamp-flam-live-sketch {
-  grid-area: 2 / 40 / 3 / 41;
+  grid-area: 2 / 32 / 3 / 33;
 }
 
 /* row 3: Reason 1 slots */
 
 #slot-fhyd-reason-1 {
-  grid-area: 3 / 1 / 4 / 6;
+  grid-area: 3 / 1 / 4 / 5;
 }
 
 #slot-tang-reason-1 {
-  grid-area: 3 / 6 / 4 / 11;
+  grid-area: 3 / 5 / 4 / 9;
 }
 
 #slot-duri-reason-1 {
-  grid-area: 3 / 11 / 4 / 16;
+  grid-area: 3 / 9 / 4 / 13;
 }
 
 #slot-poml-reason-1 {
-  grid-area: 3 / 16 / 4 / 21;
+  grid-area: 3 / 13 / 4 / 17;
 }
 
 #slot-tiff-reason-1 {
-  grid-area: 3 / 21 / 4 / 26;
+  grid-area: 3 / 17 / 4 / 21;
 }
 
 #slot-coco-reason-1 {
-  grid-area: 3 / 26 / 4 / 31;
+  grid-area: 3 / 21 / 4 / 25;
 }
 
 #slot-plum-reason-1 {
-  grid-area: 3 / 31 / 4 / 36;
+  grid-area: 3 / 25 / 4 / 29;
 }
 
 #slot-flam-reason-1 {
-  grid-area: 3 / 36 / 4 / 41;
+  grid-area: 3 / 29 / 4 / 33;
 }
 
 /* row 4: Reason 1 lamps */
@@ -481,182 +436,151 @@ main {
 #lamp-fhyd-reason-1-pb {
   grid-area: 4 / 4 / 5 / 5;
 }
-#lamp-fhyd-reason-1-sketch {
+
+#lamp-tang-reason-1-note {
   grid-area: 4 / 5 / 5 / 6;
 }
 
-#lamp-tang-reason-1-note {
+#lamp-tang-reason-1-cc {
   grid-area: 4 / 6 / 5 / 7;
 }
 
-#lamp-tang-reason-1-cc {
+#lamp-tang-reason-1-at {
   grid-area: 4 / 7 / 5 / 8;
 }
 
-#lamp-tang-reason-1-at {
+#lamp-tang-reason-1-pb {
   grid-area: 4 / 8 / 5 / 9;
 }
 
-#lamp-tang-reason-1-pb {
+#lamp-duri-reason-1-note {
   grid-area: 4 / 9 / 5 / 10;
 }
 
-#lamp-tang-reason-1-sketch {
+#lamp-duri-reason-1-cc {
   grid-area: 4 / 10 / 5 / 11;
 }
 
-#lamp-duri-reason-1-note {
+#lamp-duri-reason-1-at {
   grid-area: 4 / 11 / 5 / 12;
 }
 
-#lamp-duri-reason-1-cc {
+#lamp-duri-reason-1-pb {
   grid-area: 4 / 12 / 5 / 13;
 }
 
-#lamp-duri-reason-1-at {
+#lamp-poml-reason-1-note {
   grid-area: 4 / 13 / 5 / 14;
 }
 
-#lamp-duri-reason-1-pb {
+#lamp-poml-reason-1-cc {
   grid-area: 4 / 14 / 5 / 15;
 }
 
-#lamp-duri-reason-1-sketch {
+#lamp-poml-reason-1-at {
   grid-area: 4 / 15 / 5 / 16;
 }
 
-#lamp-poml-reason-1-note {
+#lamp-poml-reason-1-pb {
   grid-area: 4 / 16 / 5 / 17;
 }
 
-#lamp-poml-reason-1-cc {
+#lamp-tiff-reason-1-note {
   grid-area: 4 / 17 / 5 / 18;
 }
 
-#lamp-poml-reason-1-at {
+#lamp-tiff-reason-1-cc {
   grid-area: 4 / 18 / 5 / 19;
 }
 
-#lamp-poml-reason-1-pb {
+#lamp-tiff-reason-1-at {
   grid-area: 4 / 19 / 5 / 20;
 }
 
-#lamp-poml-reason-1-sketch {
+#lamp-tiff-reason-1-pb {
   grid-area: 4 / 20 / 5 / 21;
 }
 
-#lamp-tiff-reason-1-note {
+#lamp-coco-reason-1-note {
   grid-area: 4 / 21 / 5 / 22;
 }
 
-#lamp-tiff-reason-1-cc {
+#lamp-coco-reason-1-cc {
   grid-area: 4 / 22 / 5 / 23;
 }
 
-#lamp-tiff-reason-1-at {
+#lamp-coco-reason-1-at {
   grid-area: 4 / 23 / 5 / 24;
 }
 
-#lamp-tiff-reason-1-pb {
+#lamp-coco-reason-1-pb {
   grid-area: 4 / 24 / 5 / 25;
 }
 
-#lamp-tiff-reason-1-sketch {
+#lamp-plum-reason-1-note {
   grid-area: 4 / 25 / 5 / 26;
 }
 
-#lamp-coco-reason-1-note {
+#lamp-plum-reason-1-cc {
   grid-area: 4 / 26 / 5 / 27;
 }
 
-#lamp-coco-reason-1-cc {
+#lamp-plum-reason-1-at {
   grid-area: 4 / 27 / 5 / 28;
 }
 
-#lamp-coco-reason-1-at {
+#lamp-plum-reason-1-pb {
   grid-area: 4 / 28 / 5 / 29;
 }
 
-#lamp-coco-reason-1-pb {
+#lamp-flam-reason-1-note {
   grid-area: 4 / 29 / 5 / 30;
 }
 
-#lamp-coco-reason-1-sketch {
+#lamp-flam-reason-1-cc {
   grid-area: 4 / 30 / 5 / 31;
 }
 
-#lamp-plum-reason-1-note {
+#lamp-flam-reason-1-at {
   grid-area: 4 / 31 / 5 / 32;
 }
 
-#lamp-plum-reason-1-cc {
-  grid-area: 4 / 32 / 5 / 33;
-}
-
-#lamp-plum-reason-1-at {
-  grid-area: 4 / 33 / 5 / 34;
-}
-
-#lamp-plum-reason-1-pb {
-  grid-area: 4 / 34 / 5 / 35;
-}
-
-#lamp-plum-reason-1-sketch {
-  grid-area: 4 / 35 / 5 / 36;
-}
-
-#lamp-flam-reason-1-note {
-  grid-area: 4 / 36 / 5 / 37;
-}
-
-#lamp-flam-reason-1-cc {
-  grid-area: 4 / 37 / 5 / 38;
-}
-
-#lamp-flam-reason-1-at {
-  grid-area: 4 / 38 / 5 / 39;
-}
-
 #lamp-flam-reason-1-pb {
-  grid-area: 4 / 39 / 5 / 40;
-}
-
-#lamp-flam-reason-1-sketch {
-  grid-area: 4 / 40 / 5 / 41;
+  grid-area: 4 / 32 / 5 / 33;
 }
 
 /* row 5: Reason 2 slots */
 
 #slot-fhyd-reason-2 {
-  grid-area: 5 / 1 / 6 / 6;
+  grid-area: 5 / 1 / 6 / 5;
 }
 
 #slot-tang-reason-2 {
-  grid-area: 5 / 6 / 6 / 11;
+  grid-area: 5 / 5 / 6 / 9;
 }
 
 #slot-duri-reason-2 {
-  grid-area: 5 / 11 / 6 / 16;
+  grid-area: 5 / 9 / 6 / 13;
 }
 
 #slot-poml-reason-2 {
-  grid-area: 5 / 16 / 6 / 21;
+  grid-area: 5 / 13 / 6 / 17;
 }
 
 #slot-tiff-reason-2 {
-  grid-area: 5 / 21 / 6 / 26;
+  grid-area: 5 / 17 / 6 / 21;
 }
 
 #slot-coco-reason-2 {
-  grid-area: 5 / 26 / 6 / 31;
+  grid-area: 5 / 21 / 6 / 25;
 }
 
 #slot-plum-reason-2 {
-  grid-area: 5 / 31 / 6 / 36;
+  grid-area: 5 / 25 / 6 / 29;
 }
 
 #slot-flam-reason-2 {
-  grid-area: 5 / 36 / 6 / 41;
+  grid-area: 5 / 29 / 6 / 33;
 }
 
 /* row 6: Reason 2 lamps */
@@ -675,182 +599,151 @@ main {
 #lamp-fhyd-reason-2-pb {
   grid-area: 6 / 4 / 7 / 5;
 }
-#lamp-fhyd-reason-2-sketch {
+
+#lamp-tang-reason-2-note {
   grid-area: 6 / 5 / 7 / 6;
 }
 
-#lamp-tang-reason-2-note {
+#lamp-tang-reason-2-cc {
   grid-area: 6 / 6 / 7 / 7;
 }
 
-#lamp-tang-reason-2-cc {
+#lamp-tang-reason-2-at {
   grid-area: 6 / 7 / 7 / 8;
 }
 
-#lamp-tang-reason-2-at {
+#lamp-tang-reason-2-pb {
   grid-area: 6 / 8 / 7 / 9;
 }
 
-#lamp-tang-reason-2-pb {
+#lamp-duri-reason-2-note {
   grid-area: 6 / 9 / 7 / 10;
 }
 
-#lamp-tang-reason-2-sketch {
+#lamp-duri-reason-2-cc {
   grid-area: 6 / 10 / 7 / 11;
 }
 
-#lamp-duri-reason-2-note {
+#lamp-duri-reason-2-at {
   grid-area: 6 / 11 / 7 / 12;
 }
 
-#lamp-duri-reason-2-cc {
+#lamp-duri-reason-2-pb {
   grid-area: 6 / 12 / 7 / 13;
 }
 
-#lamp-duri-reason-2-at {
+#lamp-poml-reason-2-note {
   grid-area: 6 / 13 / 7 / 14;
 }
 
-#lamp-duri-reason-2-pb {
+#lamp-poml-reason-2-cc {
   grid-area: 6 / 14 / 7 / 15;
 }
 
-#lamp-duri-reason-2-sketch {
+#lamp-poml-reason-2-at {
   grid-area: 6 / 15 / 7 / 16;
 }
 
-#lamp-poml-reason-2-note {
+#lamp-poml-reason-2-pb {
   grid-area: 6 / 16 / 7 / 17;
 }
 
-#lamp-poml-reason-2-cc {
+#lamp-tiff-reason-2-note {
   grid-area: 6 / 17 / 7 / 18;
 }
 
-#lamp-poml-reason-2-at {
+#lamp-tiff-reason-2-cc {
   grid-area: 6 / 18 / 7 / 19;
 }
 
-#lamp-poml-reason-2-pb {
+#lamp-tiff-reason-2-at {
   grid-area: 6 / 19 / 7 / 20;
 }
 
-#lamp-poml-reason-2-sketch {
+#lamp-tiff-reason-2-pb {
   grid-area: 6 / 20 / 7 / 21;
 }
 
-#lamp-tiff-reason-2-note {
+#lamp-coco-reason-2-note {
   grid-area: 6 / 21 / 7 / 22;
 }
 
-#lamp-tiff-reason-2-cc {
+#lamp-coco-reason-2-cc {
   grid-area: 6 / 22 / 7 / 23;
 }
 
-#lamp-tiff-reason-2-at {
+#lamp-coco-reason-2-at {
   grid-area: 6 / 23 / 7 / 24;
 }
 
-#lamp-tiff-reason-2-pb {
+#lamp-coco-reason-2-pb {
   grid-area: 6 / 24 / 7 / 25;
 }
 
-#lamp-tiff-reason-2-sketch {
+#lamp-plum-reason-2-note {
   grid-area: 6 / 25 / 7 / 26;
 }
 
-#lamp-coco-reason-2-note {
+#lamp-plum-reason-2-cc {
   grid-area: 6 / 26 / 7 / 27;
 }
 
-#lamp-coco-reason-2-cc {
+#lamp-plum-reason-2-at {
   grid-area: 6 / 27 / 7 / 28;
 }
 
-#lamp-coco-reason-2-at {
+#lamp-plum-reason-2-pb {
   grid-area: 6 / 28 / 7 / 29;
 }
 
-#lamp-coco-reason-2-pb {
+#lamp-flam-reason-2-note {
   grid-area: 6 / 29 / 7 / 30;
 }
 
-#lamp-coco-reason-2-sketch {
+#lamp-flam-reason-2-cc {
   grid-area: 6 / 30 / 7 / 31;
 }
 
-#lamp-plum-reason-2-note {
+#lamp-flam-reason-2-at {
   grid-area: 6 / 31 / 7 / 32;
 }
 
-#lamp-plum-reason-2-cc {
-  grid-area: 6 / 32 / 7 / 33;
-}
-
-#lamp-plum-reason-2-at {
-  grid-area: 6 / 33 / 7 / 34;
-}
-
-#lamp-plum-reason-2-pb {
-  grid-area: 6 / 34 / 7 / 35;
-}
-
-#lamp-plum-reason-2-sketch {
-  grid-area: 6 / 35 / 7 / 36;
-}
-
-#lamp-flam-reason-2-note {
-  grid-area: 6 / 36 / 7 / 37;
-}
-
-#lamp-flam-reason-2-cc {
-  grid-area: 6 / 37 / 7 / 38;
-}
-
-#lamp-flam-reason-2-at {
-  grid-area: 6 / 38 / 7 / 39;
-}
-
 #lamp-flam-reason-2-pb {
-  grid-area: 6 / 39 / 7 / 40;
-}
-
-#lamp-flam-reason-2-sketch {
-  grid-area: 6 / 40 / 7 / 41;
+  grid-area: 6 / 32 / 7 / 33;
 }
 
 /* row 7: Reason 3 slots */
 
 #slot-fhyd-reason-3 {
-  grid-area: 7 / 1 / 8 / 6;
+  grid-area: 7 / 1 / 8 / 5;
 }
 
 #slot-tang-reason-3 {
-  grid-area: 7 / 6 / 8 / 11;
+  grid-area: 7 / 5 / 8 / 9;
 }
 
 #slot-duri-reason-3 {
-  grid-area: 7 / 11 / 8 / 16;
+  grid-area: 7 / 9 / 8 / 13;
 }
 
 #slot-poml-reason-3 {
-  grid-area: 7 / 16 / 8 / 21;
+  grid-area: 7 / 13 / 8 / 17;
 }
 
 #slot-tiff-reason-3 {
-  grid-area: 7 / 21 / 8 / 26;
+  grid-area: 7 / 17 / 8 / 21;
 }
 
 #slot-coco-reason-3 {
-  grid-area: 7 / 26 / 8 / 31;
+  grid-area: 7 / 21 / 8 / 25;
 }
 
 #slot-plum-reason-3 {
-  grid-area: 7 / 31 / 8 / 36;
+  grid-area: 7 / 25 / 8 / 29;
 }
 
 #slot-flam-reason-3 {
-  grid-area: 7 / 36 / 8 / 41;
+  grid-area: 7 / 29 / 8 / 33;
 }
 
 /* row 8: Reason 3 lamps */
@@ -869,182 +762,151 @@ main {
 #lamp-fhyd-reason-3-pb {
   grid-area: 8 / 4 / 9 / 5;
 }
-#lamp-fhyd-reason-3-sketch {
+
+#lamp-tang-reason-3-note {
   grid-area: 8 / 5 / 9 / 6;
 }
 
-#lamp-tang-reason-3-note {
+#lamp-tang-reason-3-cc {
   grid-area: 8 / 6 / 9 / 7;
 }
 
-#lamp-tang-reason-3-cc {
+#lamp-tang-reason-3-at {
   grid-area: 8 / 7 / 9 / 8;
 }
 
-#lamp-tang-reason-3-at {
+#lamp-tang-reason-3-pb {
   grid-area: 8 / 8 / 9 / 9;
 }
 
-#lamp-tang-reason-3-pb {
+#lamp-duri-reason-3-note {
   grid-area: 8 / 9 / 9 / 10;
 }
 
-#lamp-tang-reason-3-sketch {
+#lamp-duri-reason-3-cc {
   grid-area: 8 / 10 / 9 / 11;
 }
 
-#lamp-duri-reason-3-note {
+#lamp-duri-reason-3-at {
   grid-area: 8 / 11 / 9 / 12;
 }
 
-#lamp-duri-reason-3-cc {
+#lamp-duri-reason-3-pb {
   grid-area: 8 / 12 / 9 / 13;
 }
 
-#lamp-duri-reason-3-at {
+#lamp-poml-reason-3-note {
   grid-area: 8 / 13 / 9 / 14;
 }
 
-#lamp-duri-reason-3-pb {
+#lamp-poml-reason-3-cc {
   grid-area: 8 / 14 / 9 / 15;
 }
 
-#lamp-duri-reason-3-sketch {
+#lamp-poml-reason-3-at {
   grid-area: 8 / 15 / 9 / 16;
 }
 
-#lamp-poml-reason-3-note {
+#lamp-poml-reason-3-pb {
   grid-area: 8 / 16 / 9 / 17;
 }
 
-#lamp-poml-reason-3-cc {
+#lamp-tiff-reason-3-note {
   grid-area: 8 / 17 / 9 / 18;
 }
 
-#lamp-poml-reason-3-at {
+#lamp-tiff-reason-3-cc {
   grid-area: 8 / 18 / 9 / 19;
 }
 
-#lamp-poml-reason-3-pb {
+#lamp-tiff-reason-3-at {
   grid-area: 8 / 19 / 9 / 20;
 }
 
-#lamp-poml-reason-3-sketch {
+#lamp-tiff-reason-3-pb {
   grid-area: 8 / 20 / 9 / 21;
 }
 
-#lamp-tiff-reason-3-note {
+#lamp-coco-reason-3-note {
   grid-area: 8 / 21 / 9 / 22;
 }
 
-#lamp-tiff-reason-3-cc {
+#lamp-coco-reason-3-cc {
   grid-area: 8 / 22 / 9 / 23;
 }
 
-#lamp-tiff-reason-3-at {
+#lamp-coco-reason-3-at {
   grid-area: 8 / 23 / 9 / 24;
 }
 
-#lamp-tiff-reason-3-pb {
+#lamp-coco-reason-3-pb {
   grid-area: 8 / 24 / 9 / 25;
 }
 
-#lamp-tiff-reason-3-sketch {
+#lamp-plum-reason-3-note {
   grid-area: 8 / 25 / 9 / 26;
 }
 
-#lamp-coco-reason-3-note {
+#lamp-plum-reason-3-cc {
   grid-area: 8 / 26 / 9 / 27;
 }
 
-#lamp-coco-reason-3-cc {
+#lamp-plum-reason-3-at {
   grid-area: 8 / 27 / 9 / 28;
 }
 
-#lamp-coco-reason-3-at {
+#lamp-plum-reason-3-pb {
   grid-area: 8 / 28 / 9 / 29;
 }
 
-#lamp-coco-reason-3-pb {
+#lamp-flam-reason-3-note {
   grid-area: 8 / 29 / 9 / 30;
 }
 
-#lamp-coco-reason-3-sketch {
+#lamp-flam-reason-3-cc {
   grid-area: 8 / 30 / 9 / 31;
 }
 
-#lamp-plum-reason-3-note {
+#lamp-flam-reason-3-at {
   grid-area: 8 / 31 / 9 / 32;
 }
 
-#lamp-plum-reason-3-cc {
-  grid-area: 8 / 32 / 9 / 33;
-}
-
-#lamp-plum-reason-3-at {
-  grid-area: 8 / 33 / 9 / 34;
-}
-
-#lamp-plum-reason-3-pb {
-  grid-area: 8 / 34 / 9 / 35;
-}
-
-#lamp-plum-reason-3-sketch {
-  grid-area: 8 / 35 / 9 / 36;
-}
-
-#lamp-flam-reason-3-note {
-  grid-area: 8 / 36 / 9 / 37;
-}
-
-#lamp-flam-reason-3-cc {
-  grid-area: 8 / 37 / 9 / 38;
-}
-
-#lamp-flam-reason-3-at {
-  grid-area: 8 / 38 / 9 / 39;
-}
-
 #lamp-flam-reason-3-pb {
-  grid-area: 8 / 39 / 9 / 40;
-}
-
-#lamp-flam-reason-3-sketch {
-  grid-area: 8 / 40 / 9 / 41;
+  grid-area: 8 / 32 / 9 / 33;
 }
 
 /* row 9: Reason 4 slots */
 
 #slot-fhyd-reason-4 {
-  grid-area: 9 / 1 / 10 / 6;
+  grid-area: 9 / 1 / 10 / 5;
 }
 
 #slot-tang-reason-4 {
-  grid-area: 9 / 6 / 10 / 11;
+  grid-area: 9 / 5 / 10 / 9;
 }
 
 #slot-duri-reason-4 {
-  grid-area: 9 / 11 / 10 / 16;
+  grid-area: 9 / 9 / 10 / 13;
 }
 
 #slot-poml-reason-4 {
-  grid-area: 9 / 16 / 10 / 21;
+  grid-area: 9 / 13 / 10 / 17;
 }
 
 #slot-tiff-reason-4 {
-  grid-area: 9 / 21 / 10 / 26;
+  grid-area: 9 / 17 / 10 / 21;
 }
 
 #slot-coco-reason-4 {
-  grid-area: 9 / 26 / 10 / 31;
+  grid-area: 9 / 21 / 10 / 25;
 }
 
 #slot-plum-reason-4 {
-  grid-area: 9 / 31 / 10 / 36;
+  grid-area: 9 / 25 / 10 / 29;
 }
 
 #slot-flam-reason-4 {
-  grid-area: 9 / 36 / 10 / 41;
+  grid-area: 9 / 29 / 10 / 33;
 }
 
 /* row 10: Reason 4 lamps */
@@ -1063,182 +925,151 @@ main {
 #lamp-fhyd-reason-4-pb {
   grid-area: 10 / 4 / 11 / 5;
 }
-#lamp-fhyd-reason-4-sketch {
+
+#lamp-tang-reason-4-note {
   grid-area: 10 / 5 / 11 / 6;
 }
 
-#lamp-tang-reason-4-note {
+#lamp-tang-reason-4-cc {
   grid-area: 10 / 6 / 11 / 7;
 }
 
-#lamp-tang-reason-4-cc {
+#lamp-tang-reason-4-at {
   grid-area: 10 / 7 / 11 / 8;
 }
 
-#lamp-tang-reason-4-at {
+#lamp-tang-reason-4-pb {
   grid-area: 10 / 8 / 11 / 9;
 }
 
-#lamp-tang-reason-4-pb {
+#lamp-duri-reason-4-note {
   grid-area: 10 / 9 / 11 / 10;
 }
 
-#lamp-tang-reason-4-sketch {
+#lamp-duri-reason-4-cc {
   grid-area: 10 / 10 / 11 / 11;
 }
 
-#lamp-duri-reason-4-note {
+#lamp-duri-reason-4-at {
   grid-area: 10 / 11 / 11 / 12;
 }
 
-#lamp-duri-reason-4-cc {
+#lamp-duri-reason-4-pb {
   grid-area: 10 / 12 / 11 / 13;
 }
 
-#lamp-duri-reason-4-at {
+#lamp-poml-reason-4-note {
   grid-area: 10 / 13 / 11 / 14;
 }
 
-#lamp-duri-reason-4-pb {
+#lamp-poml-reason-4-cc {
   grid-area: 10 / 14 / 11 / 15;
 }
 
-#lamp-duri-reason-4-sketch {
+#lamp-poml-reason-4-at {
   grid-area: 10 / 15 / 11 / 16;
 }
 
-#lamp-poml-reason-4-note {
+#lamp-poml-reason-4-pb {
   grid-area: 10 / 16 / 11 / 17;
 }
 
-#lamp-poml-reason-4-cc {
+#lamp-tiff-reason-4-note {
   grid-area: 10 / 17 / 11 / 18;
 }
 
-#lamp-poml-reason-4-at {
+#lamp-tiff-reason-4-cc {
   grid-area: 10 / 18 / 11 / 19;
 }
 
-#lamp-poml-reason-4-pb {
+#lamp-tiff-reason-4-at {
   grid-area: 10 / 19 / 11 / 20;
 }
 
-#lamp-poml-reason-4-sketch {
+#lamp-tiff-reason-4-pb {
   grid-area: 10 / 20 / 11 / 21;
 }
 
-#lamp-tiff-reason-4-note {
+#lamp-coco-reason-4-note {
   grid-area: 10 / 21 / 11 / 22;
 }
 
-#lamp-tiff-reason-4-cc {
+#lamp-coco-reason-4-cc {
   grid-area: 10 / 22 / 11 / 23;
 }
 
-#lamp-tiff-reason-4-at {
+#lamp-coco-reason-4-at {
   grid-area: 10 / 23 / 11 / 24;
 }
 
-#lamp-tiff-reason-4-pb {
+#lamp-coco-reason-4-pb {
   grid-area: 10 / 24 / 11 / 25;
 }
 
-#lamp-tiff-reason-4-sketch {
+#lamp-plum-reason-4-note {
   grid-area: 10 / 25 / 11 / 26;
 }
 
-#lamp-coco-reason-4-note {
+#lamp-plum-reason-4-cc {
   grid-area: 10 / 26 / 11 / 27;
 }
 
-#lamp-coco-reason-4-cc {
+#lamp-plum-reason-4-at {
   grid-area: 10 / 27 / 11 / 28;
 }
 
-#lamp-coco-reason-4-at {
+#lamp-plum-reason-4-pb {
   grid-area: 10 / 28 / 11 / 29;
 }
 
-#lamp-coco-reason-4-pb {
+#lamp-flam-reason-4-note {
   grid-area: 10 / 29 / 11 / 30;
 }
 
-#lamp-coco-reason-4-sketch {
+#lamp-flam-reason-4-cc {
   grid-area: 10 / 30 / 11 / 31;
 }
 
-#lamp-plum-reason-4-note {
+#lamp-flam-reason-4-at {
   grid-area: 10 / 31 / 11 / 32;
 }
 
-#lamp-plum-reason-4-cc {
-  grid-area: 10 / 32 / 11 / 33;
-}
-
-#lamp-plum-reason-4-at {
-  grid-area: 10 / 33 / 11 / 34;
-}
-
-#lamp-plum-reason-4-pb {
-  grid-area: 10 / 34 / 11 / 35;
-}
-
-#lamp-plum-reason-4-sketch {
-  grid-area: 10 / 35 / 11 / 36;
-}
-
-#lamp-flam-reason-4-note {
-  grid-area: 10 / 36 / 11 / 37;
-}
-
-#lamp-flam-reason-4-cc {
-  grid-area: 10 / 37 / 11 / 38;
-}
-
-#lamp-flam-reason-4-at {
-  grid-area: 10 / 38 / 11 / 39;
-}
-
 #lamp-flam-reason-4-pb {
-  grid-area: 10 / 39 / 11 / 40;
-}
-
-#lamp-flam-reason-4-sketch {
-  grid-area: 10 / 40 / 11 / 41;
+  grid-area: 10 / 32 / 11 / 33;
 }
 
 /* row 11: Reason 5 slots */
 
 #slot-fhyd-reason-5 {
-  grid-area: 11 / 1 / 12 / 6;
+  grid-area: 11 / 1 / 12 / 5;
 }
 
 #slot-tang-reason-5 {
-  grid-area: 11 / 6 / 12 / 11;
+  grid-area: 11 / 5 / 12 / 9;
 }
 
 #slot-duri-reason-5 {
-  grid-area: 11 / 11 / 12 / 16;
+  grid-area: 11 / 9 / 12 / 13;
 }
 
 #slot-poml-reason-5 {
-  grid-area: 11 / 16 / 12 / 21;
+  grid-area: 11 / 13 / 12 / 17;
 }
 
 #slot-tiff-reason-5 {
-  grid-area: 11 / 21 / 12 / 26;
+  grid-area: 11 / 17 / 12 / 21;
 }
 
 #slot-coco-reason-5 {
-  grid-area: 11 / 26 / 12 / 31;
+  grid-area: 11 / 21 / 12 / 25;
 }
 
 #slot-plum-reason-5 {
-  grid-area: 11 / 31 / 12 / 36;
+  grid-area: 11 / 25 / 12 / 29;
 }
 
 #slot-flam-reason-5 {
-  grid-area: 11 / 36 / 12 / 41;
+  grid-area: 11 / 29 / 12 / 33;
 }
 
 /* row 12: Reason 5 lamps */
@@ -1257,182 +1088,151 @@ main {
 #lamp-fhyd-reason-5-pb {
   grid-area: 12 / 4 / 13 / 5;
 }
-#lamp-fhyd-reason-5-sketch {
+
+#lamp-tang-reason-5-note {
   grid-area: 12 / 5 / 13 / 6;
 }
 
-#lamp-tang-reason-5-note {
+#lamp-tang-reason-5-cc {
   grid-area: 12 / 6 / 13 / 7;
 }
 
-#lamp-tang-reason-5-cc {
+#lamp-tang-reason-5-at {
   grid-area: 12 / 7 / 13 / 8;
 }
 
-#lamp-tang-reason-5-at {
+#lamp-tang-reason-5-pb {
   grid-area: 12 / 8 / 13 / 9;
 }
 
-#lamp-tang-reason-5-pb {
+#lamp-duri-reason-5-note {
   grid-area: 12 / 9 / 13 / 10;
 }
 
-#lamp-tang-reason-5-sketch {
+#lamp-duri-reason-5-cc {
   grid-area: 12 / 10 / 13 / 11;
 }
 
-#lamp-duri-reason-5-note {
+#lamp-duri-reason-5-at {
   grid-area: 12 / 11 / 13 / 12;
 }
 
-#lamp-duri-reason-5-cc {
+#lamp-duri-reason-5-pb {
   grid-area: 12 / 12 / 13 / 13;
 }
 
-#lamp-duri-reason-5-at {
+#lamp-poml-reason-5-note {
   grid-area: 12 / 13 / 13 / 14;
 }
 
-#lamp-duri-reason-5-pb {
+#lamp-poml-reason-5-cc {
   grid-area: 12 / 14 / 13 / 15;
 }
 
-#lamp-duri-reason-5-sketch {
+#lamp-poml-reason-5-at {
   grid-area: 12 / 15 / 13 / 16;
 }
 
-#lamp-poml-reason-5-note {
+#lamp-poml-reason-5-pb {
   grid-area: 12 / 16 / 13 / 17;
 }
 
-#lamp-poml-reason-5-cc {
+#lamp-tiff-reason-5-note {
   grid-area: 12 / 17 / 13 / 18;
 }
 
-#lamp-poml-reason-5-at {
+#lamp-tiff-reason-5-cc {
   grid-area: 12 / 18 / 13 / 19;
 }
 
-#lamp-poml-reason-5-pb {
+#lamp-tiff-reason-5-at {
   grid-area: 12 / 19 / 13 / 20;
 }
 
-#lamp-poml-reason-5-sketch {
+#lamp-tiff-reason-5-pb {
   grid-area: 12 / 20 / 13 / 21;
 }
 
-#lamp-tiff-reason-5-note {
+#lamp-coco-reason-5-note {
   grid-area: 12 / 21 / 13 / 22;
 }
 
-#lamp-tiff-reason-5-cc {
+#lamp-coco-reason-5-cc {
   grid-area: 12 / 22 / 13 / 23;
 }
 
-#lamp-tiff-reason-5-at {
+#lamp-coco-reason-5-at {
   grid-area: 12 / 23 / 13 / 24;
 }
 
-#lamp-tiff-reason-5-pb {
+#lamp-coco-reason-5-pb {
   grid-area: 12 / 24 / 13 / 25;
 }
 
-#lamp-tiff-reason-5-sketch {
+#lamp-plum-reason-5-note {
   grid-area: 12 / 25 / 13 / 26;
 }
 
-#lamp-coco-reason-5-note {
+#lamp-plum-reason-5-cc {
   grid-area: 12 / 26 / 13 / 27;
 }
 
-#lamp-coco-reason-5-cc {
+#lamp-plum-reason-5-at {
   grid-area: 12 / 27 / 13 / 28;
 }
 
-#lamp-coco-reason-5-at {
+#lamp-plum-reason-5-pb {
   grid-area: 12 / 28 / 13 / 29;
 }
 
-#lamp-coco-reason-5-pb {
+#lamp-flam-reason-5-note {
   grid-area: 12 / 29 / 13 / 30;
 }
 
-#lamp-coco-reason-5-sketch {
+#lamp-flam-reason-5-cc {
   grid-area: 12 / 30 / 13 / 31;
 }
 
-#lamp-plum-reason-5-note {
+#lamp-flam-reason-5-at {
   grid-area: 12 / 31 / 13 / 32;
 }
 
-#lamp-plum-reason-5-cc {
-  grid-area: 12 / 32 / 13 / 33;
-}
-
-#lamp-plum-reason-5-at {
-  grid-area: 12 / 33 / 13 / 34;
-}
-
-#lamp-plum-reason-5-pb {
-  grid-area: 12 / 34 / 13 / 35;
-}
-
-#lamp-plum-reason-5-sketch {
-  grid-area: 12 / 35 / 13 / 36;
-}
-
-#lamp-flam-reason-5-note {
-  grid-area: 12 / 36 / 13 / 37;
-}
-
-#lamp-flam-reason-5-cc {
-  grid-area: 12 / 37 / 13 / 38;
-}
-
-#lamp-flam-reason-5-at {
-  grid-area: 12 / 38 / 13 / 39;
-}
-
 #lamp-flam-reason-5-pb {
-  grid-area: 12 / 39 / 13 / 40;
-}
-
-#lamp-flam-reason-5-sketch {
-  grid-area: 12 / 40 / 13 / 41;
+  grid-area: 12 / 32 / 13 / 33;
 }
 
 /* row 13: Reason 6 slots */
 
 #slot-fhyd-reason-6 {
-  grid-area: 13 / 1 / 14 / 6;
+  grid-area: 13 / 1 / 14 / 5;
 }
 
 #slot-tang-reason-6 {
-  grid-area: 13 / 6 / 14 / 11;
+  grid-area: 13 / 5 / 14 / 9;
 }
 
 #slot-duri-reason-6 {
-  grid-area: 13 / 11 / 14 / 16;
+  grid-area: 13 / 9 / 14 / 13;
 }
 
 #slot-poml-reason-6 {
-  grid-area: 13 / 16 / 14 / 21;
+  grid-area: 13 / 13 / 14 / 17;
 }
 
 #slot-tiff-reason-6 {
-  grid-area: 13 / 21 / 14 / 26;
+  grid-area: 13 / 17 / 14 / 21;
 }
 
 #slot-coco-reason-6 {
-  grid-area: 13 / 26 / 14 / 31;
+  grid-area: 13 / 21 / 14 / 25;
 }
 
 #slot-plum-reason-6 {
-  grid-area: 13 / 31 / 14 / 36;
+  grid-area: 13 / 25 / 14 / 29;
 }
 
 #slot-flam-reason-6 {
-  grid-area: 13 / 36 / 14 / 41;
+  grid-area: 13 / 29 / 14 / 33;
 }
 
 /* row 14: Reason 6 lamps */
@@ -1451,182 +1251,151 @@ main {
 #lamp-fhyd-reason-6-pb {
   grid-area: 14 / 4 / 15 / 5;
 }
-#lamp-fhyd-reason-6-sketch {
+
+#lamp-tang-reason-6-note {
   grid-area: 14 / 5 / 15 / 6;
 }
 
-#lamp-tang-reason-6-note {
+#lamp-tang-reason-6-cc {
   grid-area: 14 / 6 / 15 / 7;
 }
 
-#lamp-tang-reason-6-cc {
+#lamp-tang-reason-6-at {
   grid-area: 14 / 7 / 15 / 8;
 }
 
-#lamp-tang-reason-6-at {
+#lamp-tang-reason-6-pb {
   grid-area: 14 / 8 / 15 / 9;
 }
 
-#lamp-tang-reason-6-pb {
+#lamp-duri-reason-6-note {
   grid-area: 14 / 9 / 15 / 10;
 }
 
-#lamp-tang-reason-6-sketch {
+#lamp-duri-reason-6-cc {
   grid-area: 14 / 10 / 15 / 11;
 }
 
-#lamp-duri-reason-6-note {
+#lamp-duri-reason-6-at {
   grid-area: 14 / 11 / 15 / 12;
 }
 
-#lamp-duri-reason-6-cc {
+#lamp-duri-reason-6-pb {
   grid-area: 14 / 12 / 15 / 13;
 }
 
-#lamp-duri-reason-6-at {
+#lamp-poml-reason-6-note {
   grid-area: 14 / 13 / 15 / 14;
 }
 
-#lamp-duri-reason-6-pb {
+#lamp-poml-reason-6-cc {
   grid-area: 14 / 14 / 15 / 15;
 }
 
-#lamp-duri-reason-6-sketch {
+#lamp-poml-reason-6-at {
   grid-area: 14 / 15 / 15 / 16;
 }
 
-#lamp-poml-reason-6-note {
+#lamp-poml-reason-6-pb {
   grid-area: 14 / 16 / 15 / 17;
 }
 
-#lamp-poml-reason-6-cc {
+#lamp-tiff-reason-6-note {
   grid-area: 14 / 17 / 15 / 18;
 }
 
-#lamp-poml-reason-6-at {
+#lamp-tiff-reason-6-cc {
   grid-area: 14 / 18 / 15 / 19;
 }
 
-#lamp-poml-reason-6-pb {
+#lamp-tiff-reason-6-at {
   grid-area: 14 / 19 / 15 / 20;
 }
 
-#lamp-poml-reason-6-sketch {
+#lamp-tiff-reason-6-pb {
   grid-area: 14 / 20 / 15 / 21;
 }
 
-#lamp-tiff-reason-6-note {
+#lamp-coco-reason-6-note {
   grid-area: 14 / 21 / 15 / 22;
 }
 
-#lamp-tiff-reason-6-cc {
+#lamp-coco-reason-6-cc {
   grid-area: 14 / 22 / 15 / 23;
 }
 
-#lamp-tiff-reason-6-at {
+#lamp-coco-reason-6-at {
   grid-area: 14 / 23 / 15 / 24;
 }
 
-#lamp-tiff-reason-6-pb {
+#lamp-coco-reason-6-pb {
   grid-area: 14 / 24 / 15 / 25;
 }
 
-#lamp-tiff-reason-6-sketch {
+#lamp-plum-reason-6-note {
   grid-area: 14 / 25 / 15 / 26;
 }
 
-#lamp-coco-reason-6-note {
+#lamp-plum-reason-6-cc {
   grid-area: 14 / 26 / 15 / 27;
 }
 
-#lamp-coco-reason-6-cc {
+#lamp-plum-reason-6-at {
   grid-area: 14 / 27 / 15 / 28;
 }
 
-#lamp-coco-reason-6-at {
+#lamp-plum-reason-6-pb {
   grid-area: 14 / 28 / 15 / 29;
 }
 
-#lamp-coco-reason-6-pb {
+#lamp-flam-reason-6-note {
   grid-area: 14 / 29 / 15 / 30;
 }
 
-#lamp-coco-reason-6-sketch {
+#lamp-flam-reason-6-cc {
   grid-area: 14 / 30 / 15 / 31;
 }
 
-#lamp-plum-reason-6-note {
+#lamp-flam-reason-6-at {
   grid-area: 14 / 31 / 15 / 32;
 }
 
-#lamp-plum-reason-6-cc {
-  grid-area: 14 / 32 / 15 / 33;
-}
-
-#lamp-plum-reason-6-at {
-  grid-area: 14 / 33 / 15 / 34;
-}
-
-#lamp-plum-reason-6-pb {
-  grid-area: 14 / 34 / 15 / 35;
-}
-
-#lamp-plum-reason-6-sketch {
-  grid-area: 14 / 35 / 15 / 36;
-}
-
-#lamp-flam-reason-6-note {
-  grid-area: 14 / 36 / 15 / 37;
-}
-
-#lamp-flam-reason-6-cc {
-  grid-area: 14 / 37 / 15 / 38;
-}
-
-#lamp-flam-reason-6-at {
-  grid-area: 14 / 38 / 15 / 39;
-}
-
 #lamp-flam-reason-6-pb {
-  grid-area: 14 / 39 / 15 / 40;
-}
-
-#lamp-flam-reason-6-sketch {
-  grid-area: 14 / 40 / 15 / 41;
+  grid-area: 14 / 32 / 15 / 33;
 }
 
 /* row 15: Reason 7 slots */
 
 #slot-fhyd-reason-7 {
-  grid-area: 15 / 1 / 16 / 6;
+  grid-area: 15 / 1 / 16 / 5;
 }
 
 #slot-tang-reason-7 {
-  grid-area: 15 / 6 / 16 / 11;
+  grid-area: 15 / 5 / 16 / 9;
 }
 
 #slot-duri-reason-7 {
-  grid-area: 15 / 11 / 16 / 16;
+  grid-area: 15 / 9 / 16 / 13;
 }
 
 #slot-poml-reason-7 {
-  grid-area: 15 / 16 / 16 / 21;
+  grid-area: 15 / 13 / 16 / 17;
 }
 
 #slot-tiff-reason-7 {
-  grid-area: 15 / 21 / 16 / 26;
+  grid-area: 15 / 17 / 16 / 21;
 }
 
 #slot-coco-reason-7 {
-  grid-area: 15 / 26 / 16 / 31;
+  grid-area: 15 / 21 / 16 / 25;
 }
 
 #slot-plum-reason-7 {
-  grid-area: 15 / 31 / 16 / 36;
+  grid-area: 15 / 25 / 16 / 29;
 }
 
 #slot-flam-reason-7 {
-  grid-area: 15 / 36 / 16 / 41;
+  grid-area: 15 / 29 / 16 / 33;
 }
 
 /* row 16: Reason 7 lamps */
@@ -1645,182 +1414,151 @@ main {
 #lamp-fhyd-reason-7-pb {
   grid-area: 16 / 4 / 17 / 5;
 }
-#lamp-fhyd-reason-7-sketch {
+
+#lamp-tang-reason-7-note {
   grid-area: 16 / 5 / 17 / 6;
 }
 
-#lamp-tang-reason-7-note {
+#lamp-tang-reason-7-cc {
   grid-area: 16 / 6 / 17 / 7;
 }
 
-#lamp-tang-reason-7-cc {
+#lamp-tang-reason-7-at {
   grid-area: 16 / 7 / 17 / 8;
 }
 
-#lamp-tang-reason-7-at {
+#lamp-tang-reason-7-pb {
   grid-area: 16 / 8 / 17 / 9;
 }
 
-#lamp-tang-reason-7-pb {
+#lamp-duri-reason-7-note {
   grid-area: 16 / 9 / 17 / 10;
 }
 
-#lamp-tang-reason-7-sketch {
+#lamp-duri-reason-7-cc {
   grid-area: 16 / 10 / 17 / 11;
 }
 
-#lamp-duri-reason-7-note {
+#lamp-duri-reason-7-at {
   grid-area: 16 / 11 / 17 / 12;
 }
 
-#lamp-duri-reason-7-cc {
+#lamp-duri-reason-7-pb {
   grid-area: 16 / 12 / 17 / 13;
 }
 
-#lamp-duri-reason-7-at {
+#lamp-poml-reason-7-note {
   grid-area: 16 / 13 / 17 / 14;
 }
 
-#lamp-duri-reason-7-pb {
+#lamp-poml-reason-7-cc {
   grid-area: 16 / 14 / 17 / 15;
 }
 
-#lamp-duri-reason-7-sketch {
+#lamp-poml-reason-7-at {
   grid-area: 16 / 15 / 17 / 16;
 }
 
-#lamp-poml-reason-7-note {
+#lamp-poml-reason-7-pb {
   grid-area: 16 / 16 / 17 / 17;
 }
 
-#lamp-poml-reason-7-cc {
+#lamp-tiff-reason-7-note {
   grid-area: 16 / 17 / 17 / 18;
 }
 
-#lamp-poml-reason-7-at {
+#lamp-tiff-reason-7-cc {
   grid-area: 16 / 18 / 17 / 19;
 }
 
-#lamp-poml-reason-7-pb {
+#lamp-tiff-reason-7-at {
   grid-area: 16 / 19 / 17 / 20;
 }
 
-#lamp-poml-reason-7-sketch {
+#lamp-tiff-reason-7-pb {
   grid-area: 16 / 20 / 17 / 21;
 }
 
-#lamp-tiff-reason-7-note {
+#lamp-coco-reason-7-note {
   grid-area: 16 / 21 / 17 / 22;
 }
 
-#lamp-tiff-reason-7-cc {
+#lamp-coco-reason-7-cc {
   grid-area: 16 / 22 / 17 / 23;
 }
 
-#lamp-tiff-reason-7-at {
+#lamp-coco-reason-7-at {
   grid-area: 16 / 23 / 17 / 24;
 }
 
-#lamp-tiff-reason-7-pb {
+#lamp-coco-reason-7-pb {
   grid-area: 16 / 24 / 17 / 25;
 }
 
-#lamp-tiff-reason-7-sketch {
+#lamp-plum-reason-7-note {
   grid-area: 16 / 25 / 17 / 26;
 }
 
-#lamp-coco-reason-7-note {
+#lamp-plum-reason-7-cc {
   grid-area: 16 / 26 / 17 / 27;
 }
 
-#lamp-coco-reason-7-cc {
+#lamp-plum-reason-7-at {
   grid-area: 16 / 27 / 17 / 28;
 }
 
-#lamp-coco-reason-7-at {
+#lamp-plum-reason-7-pb {
   grid-area: 16 / 28 / 17 / 29;
 }
 
-#lamp-coco-reason-7-pb {
+#lamp-flam-reason-7-note {
   grid-area: 16 / 29 / 17 / 30;
 }
 
-#lamp-coco-reason-7-sketch {
+#lamp-flam-reason-7-cc {
   grid-area: 16 / 30 / 17 / 31;
 }
 
-#lamp-plum-reason-7-note {
+#lamp-flam-reason-7-at {
   grid-area: 16 / 31 / 17 / 32;
 }
 
-#lamp-plum-reason-7-cc {
-  grid-area: 16 / 32 / 17 / 33;
-}
-
-#lamp-plum-reason-7-at {
-  grid-area: 16 / 33 / 17 / 34;
-}
-
-#lamp-plum-reason-7-pb {
-  grid-area: 16 / 34 / 17 / 35;
-}
-
-#lamp-plum-reason-7-sketch {
-  grid-area: 16 / 35 / 17 / 36;
-}
-
-#lamp-flam-reason-7-note {
-  grid-area: 16 / 36 / 17 / 37;
-}
-
-#lamp-flam-reason-7-cc {
-  grid-area: 16 / 37 / 17 / 38;
-}
-
-#lamp-flam-reason-7-at {
-  grid-area: 16 / 38 / 17 / 39;
-}
-
 #lamp-flam-reason-7-pb {
-  grid-area: 16 / 39 / 17 / 40;
-}
-
-#lamp-flam-reason-7-sketch {
-  grid-area: 16 / 40 / 17 / 41;
+  grid-area: 16 / 32 / 17 / 33;
 }
 
 /* row 17: Reason 8 slots */
 
 #slot-fhyd-reason-8 {
-  grid-area: 17 / 1 / 18 / 6;
+  grid-area: 17 / 1 / 18 / 5;
 }
 
 #slot-tang-reason-8 {
-  grid-area: 17 / 6 / 18 / 11;
+  grid-area: 17 / 5 / 18 / 9;
 }
 
 #slot-duri-reason-8 {
-  grid-area: 17 / 11 / 18 / 16;
+  grid-area: 17 / 9 / 18 / 13;
 }
 
 #slot-poml-reason-8 {
-  grid-area: 17 / 16 / 18 / 21;
+  grid-area: 17 / 13 / 18 / 17;
 }
 
 #slot-tiff-reason-8 {
-  grid-area: 17 / 21 / 18 / 26;
+  grid-area: 17 / 17 / 18 / 21;
 }
 
 #slot-coco-reason-8 {
-  grid-area: 17 / 26 / 18 / 31;
+  grid-area: 17 / 21 / 18 / 25;
 }
 
 #slot-plum-reason-8 {
-  grid-area: 17 / 31 / 18 / 36;
+  grid-area: 17 / 25 / 18 / 29;
 }
 
 #slot-flam-reason-8 {
-  grid-area: 17 / 36 / 18 / 41;
+  grid-area: 17 / 29 / 18 / 33;
 }
 
 /* row 18: Reason 8 lamps */
@@ -1839,146 +1577,115 @@ main {
 #lamp-fhyd-reason-8-pb {
   grid-area: 18 / 4 / 19 / 5;
 }
-#lamp-fhyd-reason-8-sketch {
+
+#lamp-tang-reason-8-note {
   grid-area: 18 / 5 / 19 / 6;
 }
 
-#lamp-tang-reason-8-note {
+#lamp-tang-reason-8-cc {
   grid-area: 18 / 6 / 19 / 7;
 }
 
-#lamp-tang-reason-8-cc {
+#lamp-tang-reason-8-at {
   grid-area: 18 / 7 / 19 / 8;
 }
 
-#lamp-tang-reason-8-at {
+#lamp-tang-reason-8-pb {
   grid-area: 18 / 8 / 19 / 9;
 }
 
-#lamp-tang-reason-8-pb {
+#lamp-duri-reason-8-note {
   grid-area: 18 / 9 / 19 / 10;
 }
 
-#lamp-tang-reason-8-sketch {
+#lamp-duri-reason-8-cc {
   grid-area: 18 / 10 / 19 / 11;
 }
 
-#lamp-duri-reason-8-note {
+#lamp-duri-reason-8-at {
   grid-area: 18 / 11 / 19 / 12;
 }
 
-#lamp-duri-reason-8-cc {
+#lamp-duri-reason-8-pb {
   grid-area: 18 / 12 / 19 / 13;
 }
 
-#lamp-duri-reason-8-at {
+#lamp-poml-reason-8-note {
   grid-area: 18 / 13 / 19 / 14;
 }
 
-#lamp-duri-reason-8-pb {
+#lamp-poml-reason-8-cc {
   grid-area: 18 / 14 / 19 / 15;
 }
 
-#lamp-duri-reason-8-sketch {
+#lamp-poml-reason-8-at {
   grid-area: 18 / 15 / 19 / 16;
 }
 
-#lamp-poml-reason-8-note {
+#lamp-poml-reason-8-pb {
   grid-area: 18 / 16 / 19 / 17;
 }
 
-#lamp-poml-reason-8-cc {
+#lamp-tiff-reason-8-note {
   grid-area: 18 / 17 / 19 / 18;
 }
 
-#lamp-poml-reason-8-at {
+#lamp-tiff-reason-8-cc {
   grid-area: 18 / 18 / 19 / 19;
 }
 
-#lamp-poml-reason-8-pb {
+#lamp-tiff-reason-8-at {
   grid-area: 18 / 19 / 19 / 20;
 }
 
-#lamp-poml-reason-8-sketch {
+#lamp-tiff-reason-8-pb {
   grid-area: 18 / 20 / 19 / 21;
 }
 
-#lamp-tiff-reason-8-note {
+#lamp-coco-reason-8-note {
   grid-area: 18 / 21 / 19 / 22;
 }
 
-#lamp-tiff-reason-8-cc {
+#lamp-coco-reason-8-cc {
   grid-area: 18 / 22 / 19 / 23;
 }
 
-#lamp-tiff-reason-8-at {
+#lamp-coco-reason-8-at {
   grid-area: 18 / 23 / 19 / 24;
 }
 
-#lamp-tiff-reason-8-pb {
+#lamp-coco-reason-8-pb {
   grid-area: 18 / 24 / 19 / 25;
 }
 
-#lamp-tiff-reason-8-sketch {
+#lamp-plum-reason-8-note {
   grid-area: 18 / 25 / 19 / 26;
 }
 
-#lamp-coco-reason-8-note {
+#lamp-plum-reason-8-cc {
   grid-area: 18 / 26 / 19 / 27;
 }
 
-#lamp-coco-reason-8-cc {
+#lamp-plum-reason-8-at {
   grid-area: 18 / 27 / 19 / 28;
 }
 
-#lamp-coco-reason-8-at {
+#lamp-plum-reason-8-pb {
   grid-area: 18 / 28 / 19 / 29;
 }
 
-#lamp-coco-reason-8-pb {
+#lamp-flam-reason-8-note {
   grid-area: 18 / 29 / 19 / 30;
 }
 
-#lamp-coco-reason-8-sketch {
+#lamp-flam-reason-8-cc {
   grid-area: 18 / 30 / 19 / 31;
 }
 
-#lamp-plum-reason-8-note {
+#lamp-flam-reason-8-at {
   grid-area: 18 / 31 / 19 / 32;
 }
 
-#lamp-plum-reason-8-cc {
-  grid-area: 18 / 32 / 19 / 33;
-}
-
-#lamp-plum-reason-8-at {
-  grid-area: 18 / 33 / 19 / 34;
-}
-
-#lamp-plum-reason-8-pb {
-  grid-area: 18 / 34 / 19 / 35;
-}
-
-#lamp-plum-reason-8-sketch {
-  grid-area: 18 / 35 / 19 / 36;
-}
-
-#lamp-flam-reason-8-note {
-  grid-area: 18 / 36 / 19 / 37;
-}
-
-#lamp-flam-reason-8-cc {
-  grid-area: 18 / 37 / 19 / 38;
-}
-
-#lamp-flam-reason-8-at {
-  grid-area: 18 / 38 / 19 / 39;
-}
-
 #lamp-flam-reason-8-pb {
-  grid-area: 18 / 39 / 19 / 40;
-}
-
-#lamp-flam-reason-8-sketch {
-  grid-area: 18 / 40 / 19 / 41;
+  grid-area: 18 / 32 / 19 / 33;
 }
