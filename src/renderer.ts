@@ -27,24 +27,23 @@
  */
 
 import "./index.css";
-import { createNoteUpdater, updateSketch } from "./frontend";
+import {
+  createAfterTouchUpdater,
+  createControlChangeUpdater,
+  createNoteUpdater,
+  createPitchBendUpdater,
+  updateSketch,
+} from "./frontend";
 
+const updateAfterTouch = createAfterTouchUpdater();
+const updateControlChange = createControlChangeUpdater();
 const updateNote = createNoteUpdater();
+const updatePitchBend = createPitchBendUpdater();
 
 window.electronAPI.onUiUpdate((uiUpdate: UiUpdate) => {
-  const { type, track, sketch, value } = uiUpdate;
-  console.log("type:", type);
-  console.log("track:", track);
-  console.log("sketch:", sketch);
-  console.log("value:", value);
-  switch (type) {
-    case "sketch":
-      updateSketch(uiUpdate);
-      break;
-    case "note-on":
-    case "note-off":
-      updateNote(uiUpdate);
-      break;
-    default:
-  }
+  updateAfterTouch(uiUpdate);
+  updateControlChange(uiUpdate);
+  updateNote(uiUpdate);
+  updatePitchBend(uiUpdate);
+  updateSketch(uiUpdate);
 });

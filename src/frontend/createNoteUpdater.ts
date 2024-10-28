@@ -9,29 +9,32 @@ export function createNoteUpdater() {
     plum: new Array(127).fill(false),
     flam: new Array(127).fill(false),
   };
+
   return (uiUpdate: UiUpdate) => {
     const { type, track, sketch, value } = uiUpdate;
-    if (type === "note-on") {
-      noteCounts[track][value] = true;
-      console.log("Note on:", value);
+
+    switch (type) {
+      case "note-on":
+        noteCounts[track][value] = true;
+        break;
+      case "note-off":
+        noteCounts[track][value] = false;
+        break;
+      default:
+        return;
     }
-    if (type === "note-off") {
-      noteCounts[track][value]=false;
-      console.log("Note off:", value);
-    }
-    const isLit=noteCounts[track].some(value => value);
-    console.log("is lit:", isLit);
+
+    const isLit = noteCounts[track].some((value) => value);
 
     [
       document.getElementById(`lamp-${track}-live-note`),
-      document.getElementById(`lamp-${track}-reason-${sketch}-note`)
-
-    ].forEach(element => {
+      document.getElementById(`lamp-${track}-reason-${sketch}-note`),
+    ].forEach((element) => {
       if (isLit) {
         element.classList.add("lamp-note-lit");
       } else {
         element.classList.remove("lamp-note-lit");
       }
-    })
+    });
   };
 }

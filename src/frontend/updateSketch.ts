@@ -1,5 +1,10 @@
 export function updateSketch(uiUpdate: UiUpdate) {
-  const { track, sketch } = uiUpdate;
+  const { type, track, sketch } = uiUpdate;
+
+  if (type !== "sketch") {
+    return;
+  }
+
   for (let currSketch = 1; currSketch <= 8; currSketch++) {
     const elements = [];
 
