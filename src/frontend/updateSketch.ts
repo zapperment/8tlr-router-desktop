@@ -13,7 +13,6 @@ export function updateSketch(uiUpdate: UiUpdate) {
     elements.push(document.getElementById(`lamp-${track}-reason-${currSketch}-cc`));
     elements.push(document.getElementById(`lamp-${track}-reason-${currSketch}-at`));
     elements.push(document.getElementById(`lamp-${track}-reason-${currSketch}-pb`));
-    elements.push(document.getElementById(`lamp-${track}-reason-${currSketch}-sketch`));
 
     for (const element of elements) {
       if (currSketch === sketch) {
