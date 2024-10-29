@@ -44,3 +44,18 @@ portName:
 Download the latest version on the [release page](https://github.com/zapperment/8tlr-router-desktop/releases/).
 
 Unzip and move the app contained in the zip file to your applications folder.
+
+### “XYZ Is Damaged and Can’t Be Opened. You Should Move It To The Trash”
+
+If you get this error, open up a terminal, go to the applications folder, and run this command:
+
+```
+sudo xattr -c Eight\ Track\ LR\ Router.app
+```
+
+You need admin privileges to do this.
+
+This is, unfortunately, a security measure by Apple that prevents apps downloaded from the internet from getting
+executed unless they are approved by Apple.
+
+See discussion here: https://discussions.apple.com/thread/253714860?sortBy=best
