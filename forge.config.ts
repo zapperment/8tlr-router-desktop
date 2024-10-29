@@ -7,6 +7,7 @@ import { FuseV1Options, FuseVersion } from "@electron/fuses";
 const config: ForgeConfig = {
   packagerConfig: {
     asar: true,
+    icon: './src/images/8tlr-logo'
   },
   rebuildConfig: {},
   makers: [new MakerZIP({}, ["darwin"])],
