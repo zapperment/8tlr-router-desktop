@@ -95,3 +95,5 @@ out/
 .idea
 *.iml
 
+# Config
+.env

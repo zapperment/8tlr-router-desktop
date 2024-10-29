@@ -25,6 +25,7 @@
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",
     "@vitest/coverage-v8": "^2.1.2",
+    "dotenv": "^16.4.5",
     "electron": "33.0.2",
     "eslint": "^8.0.1",
     "eslint-plugin-import": "^2.25.0",
@@ -48,8 +49,8 @@
     "@julusian/midi": "^3.6.1",
     "debug": "^4.3.7",
     "electron-squirrel-startup": "^1.0.1",
-    "yaml": "^2.6.0",
-    "update-electron-app": "^3.0.0"
+    "update-electron-app": "^3.0.0",
+    "yaml": "^2.6.0"
   },
   "overrides": {
     "node-gyp": "10.2.0"

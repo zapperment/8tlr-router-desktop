@@ -3,6 +3,7 @@ import { MakerZIP } from "@electron-forge/maker-zip";
 import { VitePlugin } from "@electron-forge/plugin-vite";
 import { FusesPlugin } from "@electron-forge/plugin-fuses";
 import { FuseV1Options, FuseVersion } from "@electron/fuses";
+import "dotenv/config";
 
 const config: ForgeConfig = {
   packagerConfig: {
@@ -56,6 +57,8 @@ const config: ForgeConfig = {
           name: "8tlr-router-desktop",
         },
         prerelease: false,
+        authToken: process.env.GITHUB_TOKEN,
+        generateReleaseNotes: true,
       },
     },
   ],
