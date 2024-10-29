@@ -4,6 +4,10 @@
   "version": "1.0.0",
   "description": "Routes MIDI messages from Ableton Live to Reason",
   "main": ".vite/build/main.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zapperment/8tlr-router-desktop.git"
+  },
   "scripts": {
     "start": "electron-forge start",
     "package": "electron-forge package",
