@@ -7,9 +7,6 @@ import process from "node:process";
 import { initPort, createMidiMessageRouter, createMidiMessageHandler, createExitHandler } from "./midi";
 import type { Input, Output } from "@julusian/midi";
 import { createUiUpdater } from "./ui";
-import { updateElectronApp } from "update-electron-app";
-
-updateElectronApp();
 
 const debug = createDebug("8tlr-router:main");
 let mainWindow: BrowserWindow | null = null;
