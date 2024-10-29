@@ -7,6 +7,9 @@ import process from "node:process";
 import { initPort, createMidiMessageRouter, createMidiMessageHandler, createExitHandler } from "./midi";
 import type { Input, Output } from "@julusian/midi";
 import { createUiUpdater } from "./ui";
+import { updateElectronApp } from "update-electron-app";
+
+updateElectronApp();
 
 const debug = createDebug("8tlr-router:main");
 let mainWindow: BrowserWindow | null = null;
@@ -73,8 +76,8 @@ debug(JSON.stringify(config, null, 2));
 
 const { portName } = config;
 
-let outputs:Output[];
-let input :Input;
+let outputs: Output[];
+let input: Input;
 try {
   outputs = portName.output.map((outputPortName) => {
     debug(`Initialise output port ${outputPortName}`);
@@ -83,7 +86,7 @@ try {
 
   debug(`Initialise input port ${portName.input}`);
   input = initPort<Input>(portName.input, "input");
-} catch (error){
+} catch (error) {
   console.error(error.message);
   dialog.showErrorBox("MIDI port not found", error.message);
   process.exit(1);

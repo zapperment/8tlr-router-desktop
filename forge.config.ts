@@ -7,7 +7,7 @@ import { FuseV1Options, FuseVersion } from "@electron/fuses";
 const config: ForgeConfig = {
   packagerConfig: {
     asar: true,
-    icon: './src/images/8tlr-logo'
+    icon: "./src/images/8tlr-logo",
   },
   rebuildConfig: {},
   makers: [new MakerZIP({}, ["darwin"])],
@@ -46,6 +46,18 @@ const config: ForgeConfig = {
       [FuseV1Options.EnableEmbeddedAsarIntegrityValidation]: true,
       [FuseV1Options.OnlyLoadAppFromAsar]: true,
     }),
+  ],
+  publishers: [
+    {
+      name: "@electron-forge/publisher-github",
+      config: {
+        repository: {
+          owner: "Patrick Hund",
+          name: "Eight Track LR Router",
+        },
+        prerelease: false,
+      },
+    },
   ],
 };
 
