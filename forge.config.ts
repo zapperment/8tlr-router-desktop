@@ -52,8 +52,8 @@ const config: ForgeConfig = {
       name: "@electron-forge/publisher-github",
       config: {
         repository: {
-          owner: "Patrick Hund",
-          name: "Eight Track LR Router",
+          owner: "zapperment",
+          name: "8tlr-router-desktop",
         },
         prerelease: false,
       },

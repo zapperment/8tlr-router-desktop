@@ -1,3 +1,5 @@
+![Eight Track LR Logo](./src/images/8tlr-logo.png)
+
 # Eight Track LR Router
 
 _Routes MIDI messages from Ableton Live to Reason_
