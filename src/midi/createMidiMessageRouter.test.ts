@@ -61,7 +61,7 @@ describe("The router function created by createMidiMessageRouter", () => {
       });
 
       it("logs an error message", () => {
-        expect(debug).toHaveBeenCalledWith("Invalid data - received MIDI message on channel 9");
+        expect(debug).toHaveBeenCalledWith("[NO]  ch:  9 | note: C  3 | vel:   100 !!! invalid channel");
       });
 
       it("does not route the message to any port", () => {
@@ -81,7 +81,7 @@ describe("The router function created by createMidiMessageRouter", () => {
     it(`Logs a debug message that indicates that MIDI messages arriving on channel 1
          will now be routed to channel 9 on the same output port`, () => {
       expect(debug).toHaveBeenCalledWith(
-        "Sketch switch 2: out=0,0,0,0,0,0,0,0 / shift=true,false,false,false,false,false,false,false",
+        "[SK]  ch:  1 |            | skt:     2 >>> [SK]  ch:  9 |            | skt:     2 | port: 1",
       );
     });
     it("returns the correct result", () => {
@@ -129,7 +129,7 @@ describe("The router function created by createMidiMessageRouter", () => {
     it(`Logs a debug message that indicates that MIDI messages arriving on channel 1
          will now be routed to channel 1 on output port 2`, () => {
       expect(debug).toHaveBeenCalledWith(
-        "Sketch switch 3: out=1,0,0,0,0,0,0,0 / shift=false,false,false,false,false,false,false,false",
+        "[SK]  ch:  1 |            | skt:     3 >>> [SK]  ch:  1 |            | skt:     3 | port: 2",
       );
     });
     it("returns the correct result", () => {
@@ -142,7 +142,7 @@ describe("The router function created by createMidiMessageRouter", () => {
           ],
           "outputPortIndex": 1,
         }
-      `)
+      `);
     });
     describe("and then receives a MIDI message on channel 1", () => {
       beforeEach(() => {

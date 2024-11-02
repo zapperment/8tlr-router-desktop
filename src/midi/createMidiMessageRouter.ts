@@ -2,6 +2,7 @@ import type { MidiMessage, Output } from "@julusian/midi";
 import { getMidiChannel } from "./getMidiChannel";
 import createDebug from "debug";
 import { isSketchSwitch } from "./isSketchSwitch";
+import { formatMidiMessage } from "../utils";
 
 // exported for testing only
 export const debug = createDebug("8tlr-router:midi:midiMessageRouter");
@@ -18,7 +19,7 @@ export function createMidiMessageRouter({ outputs }: Args): MidiMessageRouter {
     const outputMidiMessage: MidiMessage = [...inputMidiMessage];
     const inputChannel = getMidiChannel(inputMidiMessage);
     if (inputChannel > 7) {
-      debug(`Invalid data - received MIDI message on channel ${inputChannel + 1}`);
+      debug(`${formatMidiMessage(inputMidiMessage, "pretty")} !!! invalid channel`);
       return null;
     }
 
@@ -26,15 +27,18 @@ export function createMidiMessageRouter({ outputs }: Args): MidiMessageRouter {
     if (isSketchSwitchMessage) {
       selectedOutputIndices[inputChannel] = Math.floor(inputMidiMessage[2] / 2);
       shiftChannel[inputChannel] = inputMidiMessage[2] % 2 !== 0;
-      debug(`Sketch switch ${inputMidiMessage[2] + 1}: out=${selectedOutputIndices} / shift=${shiftChannel}`);
     }
     if (shiftChannel[inputChannel]) {
       outputMidiMessage[0] += 8;
     }
     const outputPortIndex = selectedOutputIndices[inputChannel];
-    debug(`Output port index: ${outputPortIndex}`);
     if (!isSketchSwitchMessage) {
       outputs[outputPortIndex].sendMessage(outputMidiMessage);
+      debug(
+        `${formatMidiMessage(inputMidiMessage, "pretty")} >>> ${formatMidiMessage(outputMidiMessage, "pretty")} | port: ${outputPortIndex + 1}`,
+      );
+    } else {
+      debug(`${formatMidiMessage(inputMidiMessage, "pretty")}`);
     }
 
     return {

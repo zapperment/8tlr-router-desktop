@@ -18,18 +18,13 @@ export function sendAllNotesOff({ outputs, noteStatuses }: Args) {
   for (let outputIndex = 0; outputIndex < outputs.length; outputIndex++) {
     for (let channelIndex = 0; channelIndex < 16; channelIndex++) {
       for (let noteIndex = 0; noteIndex < 128; noteIndex++) {
-        if (
-          noteStatuses === undefined ||
-          noteStatuses[outputIndex][channelIndex][noteIndex] === false
-        ) {
+        if (noteStatuses === undefined || noteStatuses[outputIndex][channelIndex][noteIndex] === false) {
           continue;
         }
 
         // note on with velocity 0
         const noteOn: MidiMessage = [0x90 + channelIndex, noteIndex, 0x00];
-        debug(
-          `Send note on with velocity zero (${formatMidiMessage(noteOn)}) to port ${outputIndex + 1} on channel ${channelIndex + 1}`,
-        );
+        debug(`${" ".repeat(41)}>>> ${formatMidiMessage(noteOn, "pretty")} | port: ${outputIndex + 1}`);
         outputs[outputIndex].sendMessage(noteOn);
       }
     }
