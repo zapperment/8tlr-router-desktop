@@ -1,6 +1,6 @@
 import type { MidiMessage } from "@julusian/midi";
 import { formatHex } from "./formatHex";
-import { getMidiChannel, getMidiMessageType, getPitchBendValue } from "../midi";
+import { getMidiChannel, getMidiMessageType, getPitchBendValue, getSketchIndex } from "../midi";
 import { getNoteName } from "./getNoteName";
 
 type MidiMessageFormat = "hex" | "number" | "pretty";
@@ -26,7 +26,7 @@ export function formatMidiMessage(midiMessage: MidiMessage, format: MidiMessageF
     case "PB":
       return `[${midiMessageType}]  ch: ${String(midiChannel + 1).padStart(2, " ")} |            | val: ${String(getPitchBendValue(midiMessage)).padStart(5, " ")}`;
     case "SK":
-      return `[${midiMessageType}]  ch: ${String(midiChannel + 1).padStart(2, " ")} |            | skt: ${String(midiMessage[2] + 1).padStart(5, " ")}`;
+      return `[${midiMessageType}]  ch: ${String(midiChannel + 1).padStart(2, " ")} | skt:  ${String(getSketchIndex(midiMessage) + 1).padStart(4, " ")} | val:  ${String(midiMessage[2]).padStart(5, " ")}`;
     default:
       return `[??]  ch: ${String(midiChannel + 1).padStart(2, " ")} |   ${formatMidiMessage(midiMessage, "hex")} |           `;
   }

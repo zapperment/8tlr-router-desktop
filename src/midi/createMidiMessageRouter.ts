@@ -3,6 +3,7 @@ import { getMidiChannel } from "./getMidiChannel";
 import createDebug from "debug";
 import { isSketchSwitch } from "./isSketchSwitch";
 import { formatMidiMessage } from "../utils";
+import { getSketchIndex } from "./getSketchIndex";
 
 // exported for testing only
 export const debug = createDebug("8tlr-router:midi:midiMessageRouter");
@@ -25,8 +26,9 @@ export function createMidiMessageRouter({ outputs }: Args): MidiMessageRouter {
 
     const isSketchSwitchMessage = isSketchSwitch(inputMidiMessage);
     if (isSketchSwitchMessage) {
-      selectedOutputIndices[inputChannel] = Math.floor(inputMidiMessage[2] / 2);
-      shiftChannel[inputChannel] = inputMidiMessage[2] % 2 !== 0;
+      const sketchIndex = getSketchIndex(inputMidiMessage);
+      selectedOutputIndices[inputChannel] = Math.floor(sketchIndex / 2);
+      shiftChannel[inputChannel] = sketchIndex % 2 !== 0;
     }
     if (shiftChannel[inputChannel]) {
       outputMidiMessage[0] += 8;

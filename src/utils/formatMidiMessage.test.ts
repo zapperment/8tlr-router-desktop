@@ -23,7 +23,7 @@ describe("The formatMidiMessage function", () => {
     ${"pitch bend (min value)"} | ${[0xe0, 0x00, 0x00]} | ${"pretty"} | ${"[PB]  ch:  1 |            | val: -8192"}
     ${"sketch switch"}          | ${[0xb0, 0x77, 0x03]} | ${"hex"}    | ${"B0 77 03"}
     ${"sketch switch"}          | ${[0xb0, 0x77, 0x03]} | ${"number"} | ${"176 119   3"}
-    ${"sketch switch"}          | ${[0xb0, 0x77, 0x03]} | ${"pretty"} | ${"[SK]  ch:  1 |            | skt:     4"}
+    ${"sketch switch"}          | ${[0xb0, 0x77, 0x30]} | ${"pretty"} | ${"[SK]  ch:  1 |            | skt:     4"}
   `("when it receives $messageDescription and format $format", ({ midiMessage, format, expected }) => {
     it(`returns ${expected}`, () => {
       expect(formatMidiMessage(midiMessage, format)).toBe(expected);

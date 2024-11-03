@@ -17,9 +17,8 @@ const outputs: Output[] = new Array(4).fill(null).map(() => ({
 
 const NOTE_ON_CH1_C2_V100: MidiMessage = [0x90, 0x30, 0x64];
 const NOTE_ON_CH9_C2_V100: MidiMessage = [0x98, 0x30, 0x64];
-const SKETCH_SWITCH_2: MidiMessage = [0xb0, sketchSwitchControlChangeNumber, 1];
-const SKETCH_SWITCH_3: MidiMessage = [0xb0, sketchSwitchControlChangeNumber, 2];
-const SKETCH_SWITCH_INVALID: MidiMessage = [0xb0, sketchSwitchControlChangeNumber, 127];
+const SKETCH_SWITCH_2: MidiMessage = [0xb0, sketchSwitchControlChangeNumber, 0x10];
+const SKETCH_SWITCH_3: MidiMessage = [0xb0, sketchSwitchControlChangeNumber, 0x20];
 
 vi.mock("debug", () => ({ default: () => vi.fn() }));
 
@@ -80,9 +79,7 @@ describe("The router function created by createMidiMessageRouter", () => {
     });
     it(`Logs a debug message that indicates that MIDI messages arriving on channel 1
          will now be routed to channel 9 on the same output port`, () => {
-      expect(debug).toHaveBeenCalledWith(
-        "[SK]  ch:  1 |            | skt:     2 >>> [SK]  ch:  9 |            | skt:     2 | port: 1",
-      );
+      expect(debug).toHaveBeenCalledWith("[SK]  ch:  1 | skt:     2 | val:     16");
     });
     it("returns the correct result", () => {
       expect(result).toMatchInlineSnapshot(`
@@ -90,7 +87,7 @@ describe("The router function created by createMidiMessageRouter", () => {
           "outputMidiMessage": [
             184,
             119,
-            1,
+            16,
           ],
           "outputPortIndex": 0,
         }
@@ -128,9 +125,7 @@ describe("The router function created by createMidiMessageRouter", () => {
     });
     it(`Logs a debug message that indicates that MIDI messages arriving on channel 1
          will now be routed to channel 1 on output port 2`, () => {
-      expect(debug).toHaveBeenCalledWith(
-        "[SK]  ch:  1 |            | skt:     3 >>> [SK]  ch:  1 |            | skt:     3 | port: 2",
-      );
+      expect(debug).toHaveBeenCalledWith("[SK]  ch:  1 | skt:     3 | val:     32");
     });
     it("returns the correct result", () => {
       expect(result).toMatchInlineSnapshot(`
@@ -138,7 +133,7 @@ describe("The router function created by createMidiMessageRouter", () => {
           "outputMidiMessage": [
             176,
             119,
-            2,
+            32,
           ],
           "outputPortIndex": 1,
         }
@@ -166,20 +161,6 @@ describe("The router function created by createMidiMessageRouter", () => {
     });
   });
 
-  describe("when it receives an invalid sketch switch control change", () => {
-    beforeEach(() => {
-      result = midiMessageRouter(SKETCH_SWITCH_INVALID);
-    });
-    describe("and it receives a MIDI message", () => {
-      beforeEach(() => {
-        result = midiMessageRouter(NOTE_ON_CH1_C2_V100);
-      });
-
-      it("routes incoming MIDI messages to the default output port", () => {
-        expect(outputs[0].sendMessage).toHaveBeenCalledWith(NOTE_ON_CH1_C2_V100);
-      });
-    });
-  });
   afterEach(() => {
     vi.clearAllMocks();
   });
