@@ -70,6 +70,8 @@ main {
 }
 
 .slot {
+  cursor: default;
+  user-select: none;
   background-repeat: no-repeat;
   background-position-x: left;
   background-position-y: center;
