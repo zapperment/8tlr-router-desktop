@@ -11,7 +11,7 @@ interface TimeoutHandler {
   flam: NodeJS.Timeout | null;
 }
 
-export function createUpdater(midiMessageType:MidiMessageType) {
+export function createUpdater(midiMessageType: MidiMessageType) {
   const timeoutHandler: TimeoutHandler = {
     fhyd: null,
     tang: null,
@@ -34,12 +34,12 @@ export function createUpdater(midiMessageType:MidiMessageType) {
     [
       document.getElementById(`lamp-${track}-live-${midiMessageType}`),
       document.getElementById(`lamp-${track}-reason-${sketch}-${midiMessageType}`),
-    ].forEach((element) => element.classList.add("lamp-note-lit"));
+    ].forEach((element) => element.classList.add(`lamp-${midiMessageType}-lit`));
     timeoutHandler[track] = setTimeout(() => {
       [
         document.getElementById(`lamp-${track}-live-${midiMessageType}`),
         document.getElementById(`lamp-${track}-reason-${sketch}-${midiMessageType}`),
-      ].forEach((element) => element.classList.remove("lamp-note-lit"));
+      ].forEach((element) => element.classList.remove(`lamp-${midiMessageType}-lit`));
       timeoutHandler[track] = null;
     }, frontendUpdateInterval);
   };
