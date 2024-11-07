@@ -7,24 +7,24 @@ import { isControlChange } from "./isControlChange";
 import { isAfterTouch } from "./isAfterTouch";
 import { isPitchBend } from "./isPitchBend";
 
-export function getMidiMessageType(midiMessage: MidiMessage): MidiMessageType | null {
+export function getMidiMessageTypeName(midiMessage: MidiMessage, verbose = false) {
   if (isSketchSwitch(midiMessage)) {
-    return "sketch";
+    return verbose ? "sketch switch" : "SK";
   }
   if (isNoteOn(midiMessage)) {
-    return "note-on";
+    return verbose ? "note on" : "NO";
   }
   if (isNoteOff(midiMessage)) {
-    return "note-off";
+    return verbose ? "note off" : "NF";
   }
   if (isControlChange(midiMessage)) {
-    return "cc";
+    return verbose ? "control change" : "CC";
   }
   if (isAfterTouch(midiMessage)) {
-    return "at";
+    return verbose ? "aftertouch" : "AT";
   }
   if (isPitchBend(midiMessage)) {
-    return "sketch";
+    return verbose ? "pitch bend" : "PB";
   }
   return null;
 }

@@ -1,5 +1,5 @@
 import type { MidiMessage, Output } from "@julusian/midi";
-import { createMidiMessageRouter, debug } from "./createMidiMessageRouter";
+import { createMidiMessageRouter, loggers } from "./createMidiMessageRouter";
 import { sketchSwitchControlChangeNumber } from "../constants";
 
 const outputs: Output[] = new Array(4).fill(null).map(() => ({
@@ -33,7 +33,7 @@ describe("The router function created by createMidiMessageRouter", () => {
   describe("when no sketch switch MIDI message has been received previously", () => {
     describe("and it receives a MIDI message", () => {
       beforeEach(() => {
-        result = midiMessageRouter(NOTE_ON_CH1_C2_V100);
+        result = midiMessageRouter(0, NOTE_ON_CH1_C2_V100);
       });
 
       it("routes incoming MIDI messages to the default output port", () => {
@@ -56,11 +56,11 @@ describe("The router function created by createMidiMessageRouter", () => {
 
     describe("and it receives a MIDI message on a channel greater than 8", () => {
       beforeEach(() => {
-        result = midiMessageRouter(NOTE_ON_CH9_C2_V100);
+        result = midiMessageRouter(0, NOTE_ON_CH9_C2_V100);
       });
 
       it("logs an error message", () => {
-        expect(debug).toHaveBeenCalledWith("[NO]  ch:  9 | note: C  3 | vel:   100 !!! invalid channel");
+        expect(loggers.other).toHaveBeenCalledWith("   [NO]  ch:  9 | note: C  3 | vel:   100 !!! invalid channel");
       });
 
       it("does not route the message to any port", () => {
@@ -75,11 +75,11 @@ describe("The router function created by createMidiMessageRouter", () => {
 
   describe("when it receives a sketch switch control change for sketch 2", () => {
     beforeEach(() => {
-      result = midiMessageRouter(SKETCH_SWITCH_2);
+      result = midiMessageRouter(0, SKETCH_SWITCH_2);
     });
     it(`Logs a debug message that indicates that MIDI messages arriving on channel 1
          will now be routed to channel 9 on the same output port`, () => {
-      expect(debug).toHaveBeenCalledWith("[SK]  ch:  1 | skt:     2 | val:     16");
+      expect(loggers.sketch).toHaveBeenCalledWith("  [SK]  ch:  1 | skt:     2 | val:    16");
     });
     it("returns the correct result", () => {
       expect(result).toMatchInlineSnapshot(`
@@ -95,7 +95,7 @@ describe("The router function created by createMidiMessageRouter", () => {
     });
     describe("and then receives a MIDI message on channel 1", () => {
       beforeEach(() => {
-        result = midiMessageRouter(NOTE_ON_CH1_C2_V100);
+        result = midiMessageRouter(0, NOTE_ON_CH1_C2_V100);
       });
       it("routes the MIDI message to channel 9 on output port 1", () => {
         expect(outputs[0].sendMessage).toHaveBeenCalledWith([
@@ -121,11 +121,11 @@ describe("The router function created by createMidiMessageRouter", () => {
 
   describe("when it receives a sketch switch control change for sketch 3", () => {
     beforeEach(() => {
-      result = midiMessageRouter(SKETCH_SWITCH_3);
+      result = midiMessageRouter(0, SKETCH_SWITCH_3);
     });
     it(`Logs a debug message that indicates that MIDI messages arriving on channel 1
          will now be routed to channel 1 on output port 2`, () => {
-      expect(debug).toHaveBeenCalledWith("[SK]  ch:  1 | skt:     3 | val:     32");
+      expect(loggers.sketch).toHaveBeenCalledWith("  [SK]  ch:  1 | skt:     3 | val:    32");
     });
     it("returns the correct result", () => {
       expect(result).toMatchInlineSnapshot(`
@@ -141,7 +141,7 @@ describe("The router function created by createMidiMessageRouter", () => {
     });
     describe("and then receives a MIDI message on channel 1", () => {
       beforeEach(() => {
-        result = midiMessageRouter(NOTE_ON_CH1_C2_V100);
+        result = midiMessageRouter(0, NOTE_ON_CH1_C2_V100);
       });
       it("routes the MIDI message to channel 1 on output port 2", () => {
         expect(outputs[1].sendMessage).toHaveBeenCalledWith(NOTE_ON_CH1_C2_V100);

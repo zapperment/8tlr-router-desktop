@@ -19,7 +19,7 @@ interface MidiMessageRouterResult {
   outputMidiMessage: MidiMessage;
 }
 
-type MidiMessageRouter = (midiMessage: MidiMessage) => MidiMessageRouterResult | null;
+type MidiMessageRouter = (deltaTime: number, midiMessage: MidiMessage) => MidiMessageRouterResult | null;
 
 interface ProgramOptions {
   version?: boolean;
