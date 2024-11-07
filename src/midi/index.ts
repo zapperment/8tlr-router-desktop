@@ -5,6 +5,7 @@ export { getMidiChannel } from "./getMidiChannel";
 export { getPortIndex } from "./getPortIndex";
 export { getSketchIndex } from "./getSketchIndex";
 export { getMidiMessageType } from "./getMidiMessageType";
+export { getMidiMessageTypeName } from "./getMidiMessageTypeName";
 export { initPort } from "./initPort";
 export { isControlChange } from "./isControlChange";
 export { isSketchSwitch } from "./isSketchSwitch";

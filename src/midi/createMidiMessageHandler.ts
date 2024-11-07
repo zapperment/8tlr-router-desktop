@@ -7,8 +7,8 @@ interface Args {
 }
 
 export function createMidiMessageHandler({ midiMessageRouter, observeMessage, uiUpdater }: Args) {
-  return (_: number, midiMessage: MidiMessage) => {
-    const routingResult = midiMessageRouter(midiMessage);
+  return (deltaTime: number, midiMessage: MidiMessage) => {
+    const routingResult = midiMessageRouter(deltaTime, midiMessage);
     if (routingResult === null) {
       return;
     }
