@@ -6,7 +6,7 @@ const debug = createDebug("8tlr-router:midi:sendAllNotesOff");
 
 interface Args {
   outputs: Output[];
-  noteStatuses?: boolean[][][];
+  noteStatuses: boolean[][][];
 }
 
 /* The function name is actually a bit of a misnomer; Reason ignores
@@ -18,14 +18,14 @@ export function sendAllNotesOff({ outputs, noteStatuses }: Args) {
   for (let outputIndex = 0; outputIndex < outputs.length; outputIndex++) {
     for (let channelIndex = 0; channelIndex < 16; channelIndex++) {
       for (let noteIndex = 0; noteIndex < 128; noteIndex++) {
-        if (noteStatuses === undefined || noteStatuses[outputIndex][channelIndex][noteIndex] === false) {
+        if (noteStatuses[outputIndex][channelIndex][noteIndex] === false) {
           continue;
         }
 
         // note on with velocity 0
-        const noteOn: MidiMessage = [0x90 + channelIndex, noteIndex, 0x00];
-        debug(`${" ".repeat(41)}>>> ${formatMidiMessage(noteOn, "pretty")} | port: ${outputIndex + 1}`);
-        outputs[outputIndex].sendMessage(noteOn);
+        const noteOff: MidiMessage = [0x90 + channelIndex, noteIndex, 0x00];
+        debug(`${" ".repeat(41)}>>> ${formatMidiMessage(noteOff, "pretty")} | port: ${outputIndex + 1}`);
+        outputs[outputIndex].sendMessage(noteOff);
       }
     }
   }

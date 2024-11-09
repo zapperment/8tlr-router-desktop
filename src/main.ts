@@ -4,7 +4,7 @@ import { readConfig } from "./file";
 import { configFileName } from "./constants";
 import createDebug from "debug";
 import process from "node:process";
-import { initPort, createMidiMessageRouter, createMidiMessageHandler, createExitHandler } from "./midi";
+import { initPort, createMidiMessageRouter, createMidiMessageHandler, createNoteHandler } from "./midi";
 import type { Input, Output } from "@julusian/midi";
 import { createUiUpdater } from "./ui";
 
@@ -92,8 +92,8 @@ try {
 }
 
 function startRouter() {
-  const { handleExit, observeMessage } = createExitHandler({ input, outputs });
-  const midiMessageRouter = createMidiMessageRouter({ outputs });
+  const { handleExit, observeMessage, handleSketchChange } = createNoteHandler({ input, outputs });
+  const midiMessageRouter = createMidiMessageRouter({ outputs, handleSketchChange });
   const uiUpdater = createUiUpdater(mainWindow);
   const midiMessageHandler = createMidiMessageHandler({
     midiMessageRouter,
