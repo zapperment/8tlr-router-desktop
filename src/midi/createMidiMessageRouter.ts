@@ -1,9 +1,8 @@
 import type { MidiMessage, Output } from "@julusian/midi";
 import { getMidiChannel } from "./getMidiChannel";
 import createDebug from "debug";
-import { isSketchSwitch } from "./isSketchSwitch";
+import { isProgramChange } from "./isProgramChange";
 import { formatMidiMessage } from "../utils";
-import { getSketchIndex } from "./getSketchIndex";
 import { getMidiMessageType } from "./getMidiMessageType";
 
 export const loggers = {
@@ -12,7 +11,7 @@ export const loggers = {
   cc: createDebug("8tlr-router:midi:router:cc"),
   at: createDebug("8tlr-router:midi:router:at"),
   pb: createDebug("8tlr-router:midi:router:pb"),
-  sketch: createDebug("8tlr-router:midi:router:sketch"),
+  pgm: createDebug("8tlr-router:midi:router:pgm"),
   other: createDebug("8tlr-router:midi:router:other"),
 };
 
@@ -22,7 +21,7 @@ const leftPaddings = {
   cc: 6,
   at: 6,
   pb: 6,
-  sketch: 2,
+  pgm: 5,
   other: 3,
 };
 
@@ -42,9 +41,9 @@ export function createMidiMessageRouter({ outputs }: Args): MidiMessageRouter {
       return null;
     }
 
-    const isSketchSwitchMessage = isSketchSwitch(inputMidiMessage);
-    if (isSketchSwitchMessage) {
-      const sketchIndex = getSketchIndex(inputMidiMessage);
+    const isProgramChangeMessage = isProgramChange(inputMidiMessage);
+    if (isProgramChangeMessage) {
+      const sketchIndex = inputMidiMessage[1];
       selectedOutputIndices[inputChannel] = Math.floor(sketchIndex / 2);
       shiftChannel[inputChannel] = sketchIndex % 2 !== 0;
     }
@@ -52,7 +51,7 @@ export function createMidiMessageRouter({ outputs }: Args): MidiMessageRouter {
       outputMidiMessage[0] += 8;
     }
     const outputPortIndex = selectedOutputIndices[inputChannel];
-    if (!isSketchSwitchMessage) {
+    if (!isProgramChangeMessage) {
       const midiMessageType = getMidiMessageType(inputMidiMessage);
       const logger = midiMessageType === null ? loggers.other : loggers[midiMessageType];
       const leftPadding = midiMessageType === null ? leftPaddings.other : leftPaddings[midiMessageType];
@@ -61,7 +60,7 @@ export function createMidiMessageRouter({ outputs }: Args): MidiMessageRouter {
         `${" ".repeat(leftPadding)}${formatMidiMessage(inputMidiMessage, "pretty")} >>> ${formatMidiMessage(outputMidiMessage, "pretty")} | port: ${outputPortIndex + 1}`,
       );
     } else {
-      loggers.sketch(`  ${formatMidiMessage(inputMidiMessage, "pretty")}`);
+      loggers.pgm(`     ${formatMidiMessage(inputMidiMessage, "pretty")}`);
     }
 
     return {

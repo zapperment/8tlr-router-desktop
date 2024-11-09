@@ -1,30 +1,30 @@
 import type { MidiMessage } from "@julusian/midi";
 
-import { isSketchSwitch } from "./isSketchSwitch";
-import { isNoteOn } from "./isNoteOn";
-import { isNoteOff } from "./isNoteOff";
-import { isControlChange } from "./isControlChange";
 import { isAfterTouch } from "./isAfterTouch";
+import { isControlChange } from "./isControlChange";
+import { isNoteOff } from "./isNoteOff";
+import { isNoteOn } from "./isNoteOn";
 import { isPitchBend } from "./isPitchBend";
+import { isProgramChange } from "./isProgramChange";
 
 export function getMidiMessageType(midiMessage: MidiMessage): MidiMessageType | null {
-  if (isSketchSwitch(midiMessage)) {
-    return "sketch";
-  }
-  if (isNoteOn(midiMessage)) {
-    return "note-on";
-  }
-  if (isNoteOff(midiMessage)) {
-    return "note-off";
+  if (isAfterTouch(midiMessage)) {
+    return "at";
   }
   if (isControlChange(midiMessage)) {
     return "cc";
   }
-  if (isAfterTouch(midiMessage)) {
-    return "at";
+  if (isNoteOff(midiMessage)) {
+    return "note-off";
+  }
+  if (isNoteOn(midiMessage)) {
+    return "note-on";
   }
   if (isPitchBend(midiMessage)) {
-    return "sketch";
+    return "pb";
+  }
+  if (isProgramChange(midiMessage)) {
+    return "pgm";
   }
   return null;
 }
