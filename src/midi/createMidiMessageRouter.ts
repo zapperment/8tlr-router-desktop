@@ -44,7 +44,29 @@ export function createMidiMessageRouter({ outputs }: Args): MidiMessageRouter {
     const isProgramChangeMessage = isProgramChange(inputMidiMessage);
     if (isProgramChangeMessage) {
       const sketchIndex = inputMidiMessage[1];
+
+      /*
+       * 0 => 0
+       * 1 => 0
+       * 2 => 1
+       * 3 => 1
+       * 4 => 2
+       * 5 => 2
+       * 6 => 3
+       * 7 => 3
+       */
       selectedOutputIndices[inputChannel] = Math.floor(sketchIndex / 2);
+
+      /*
+       * 0 => false
+       * 1 => true
+       * 2 => false
+       * 3 => true
+       * 4 => false
+       * 5 => true
+       * 6 => false
+       * 7 => true
+       */
       shiftChannel[inputChannel] = sketchIndex % 2 !== 0;
     }
     if (shiftChannel[inputChannel]) {

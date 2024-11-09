@@ -21,9 +21,9 @@ describe("The formatMidiMessage function", () => {
     ${"pitch bend (min value)"} | ${[0xe0, 0x00, 0x00]} | ${"hex"}    | ${"E0 00 00"}
     ${"pitch bend (min value)"} | ${[0xe0, 0x00, 0x00]} | ${"number"} | ${"224   0   0"}
     ${"pitch bend (min value)"} | ${[0xe0, 0x00, 0x00]} | ${"pretty"} | ${"[PB]  ch:  1 |            | val: -8192"}
-    ${"sketch switch"}          | ${[0xb0, 0x77, 0x03]} | ${"hex"}    | ${"B0 77 03"}
-    ${"sketch switch"}          | ${[0xb0, 0x77, 0x03]} | ${"number"} | ${"176 119   3"}
-    ${"sketch switch"}          | ${[0xb0, 0x77, 0x30]} | ${"pretty"} | ${"[SK]  ch:  1 | skt:     4 | val:    48"}
+    ${"program change"}         | ${[0xc0, 0x03]}       | ${"hex"}    | ${"C0 03 __"}
+    ${"program change"}         | ${[0xc0, 0x03]}       | ${"number"} | ${"192   3 ___"}
+    ${"program change"}         | ${[0xc0, 0x03]}       | ${"pretty"} | ${"[PG]  ch:  1 |            | val:     3"}
   `("when it receives $messageDescription and format $format", ({ midiMessage, format, expected }) => {
     it(`returns ${expected}`, () => {
       expect(formatMidiMessage(midiMessage, format)).toBe(expected);
