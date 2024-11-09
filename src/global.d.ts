@@ -4,7 +4,7 @@ declare const MAIN_WINDOW_VITE_DEV_SERVER_URL: string;
 declare const MAIN_WINDOW_VITE_NAME: string;
 
 type TrackName = "fhyd" | "tang" | "duri" | "poml" | "tiff" | "coco" | "plum" | "flam";
-type MidiMessageType = "note-on" | "note-off" | "cc" | "at" | "pb" | "sketch";
+type MidiMessageType = "note-on" | "note-off" | "cc" | "at" | "pb" | "pgm";
 type Sketch = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
 
 interface UiUpdate {

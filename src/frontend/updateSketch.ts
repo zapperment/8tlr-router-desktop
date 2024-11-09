@@ -1,7 +1,7 @@
 export function updateSketch(uiUpdate: UiUpdate) {
   const { type, track, sketch } = uiUpdate;
 
-  if (type !== "sketch") {
+  if (type !== "pgm") {
     return;
   }
 
