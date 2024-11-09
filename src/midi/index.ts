@@ -1,4 +1,4 @@
-export { createExitHandler } from "./createExitHandler";
+export { createNoteHandler } from "./createNoteHandler";
 export { createMidiMessageHandler } from "./createMidiMessageHandler";
 export { createMidiMessageRouter } from "./createMidiMessageRouter";
 export { getMidiChannel } from "./getMidiChannel";

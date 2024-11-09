@@ -27,9 +27,10 @@ const leftPaddings = {
 
 interface Args {
   outputs: Output[];
+  handleSketchChange: ({ outputIndex, channelIndex }: { outputIndex: number; channelIndex: number }) => void;
 }
 
-export function createMidiMessageRouter({ outputs }: Args): MidiMessageRouter {
+export function createMidiMessageRouter({ outputs, handleSketchChange }: Args): MidiMessageRouter {
   const selectedOutputIndices = new Array<number>(8).fill(0);
   const shiftChannel = new Array<boolean>(8).fill(false);
 
@@ -43,6 +44,12 @@ export function createMidiMessageRouter({ outputs }: Args): MidiMessageRouter {
 
     const isProgramChangeMessage = isProgramChange(inputMidiMessage);
     if (isProgramChangeMessage) {
+      // send not off messages on previous sketch channel / port
+      handleSketchChange({
+        outputIndex: selectedOutputIndices[inputChannel],
+        channelIndex: shiftChannel[inputChannel] ? inputChannel + 8 : inputChannel,
+      });
+
       const sketchIndex = inputMidiMessage[1];
 
       /*
