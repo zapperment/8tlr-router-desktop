@@ -1,18 +1,12 @@
+import midi from "@julusian/midi";
 import type { MidiMessage, Output } from "@julusian/midi";
 import { createMidiMessageRouter, loggers } from "./createMidiMessageRouter";
 
-const outputs: Output[] = new Array(4).fill(null).map(() => ({
-  sendMessage: vi.fn(),
-  closePort: vi.fn(),
-  getPortCount: vi.fn(),
-  getPortName: vi.fn(),
-  openPort: vi.fn(),
-  openVirtualPort: vi.fn(),
-  send: vi.fn(),
-  destroy: vi.fn(),
-  isPortOpen: vi.fn(),
-  openPortByName: vi.fn(),
-}));
+vi.mock("@julusian/midi");
+
+const mockedMidi = vi.mocked(midi);
+
+const outputs: Output[] = new Array(4).fill(null).map(() => new mockedMidi.Output());
 
 const NOTE_ON_CH1_C2_V100: MidiMessage = [0x90, 0x30, 0x64];
 const NOTE_ON_CH9_C2_V100: MidiMessage = [0x98, 0x30, 0x64];
@@ -21,12 +15,14 @@ const PROGRAM_CHANGE_3: MidiMessage = [0xc0, 0x02];
 
 vi.mock("debug", () => ({ default: () => vi.fn() }));
 
+const handleSketchChange = vi.fn();
+
 let result: MidiMessageRouterResult | null;
 let midiMessageRouter: MidiMessageRouter;
 
 describe("The router function created by createMidiMessageRouter", () => {
   beforeEach(() => {
-    midiMessageRouter = createMidiMessageRouter({ outputs });
+    midiMessageRouter = createMidiMessageRouter({ outputs, handleSketchChange });
   });
 
   describe("when no program change MIDI message has been received previously", () => {
