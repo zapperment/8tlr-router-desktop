@@ -4,9 +4,16 @@ import { readConfig } from "./file";
 import { configFileName } from "./constants";
 import createDebug from "debug";
 import process from "node:process";
-import { initPort, createMidiMessageRouter, createMidiMessageHandler, createNoteHandler } from "./midi";
+import {
+  initPort,
+  createMidiMessageRouter,
+  createMidiMessageDispatcher,
+  createMidiMessageHandler,
+  createNoteHandler,
+} from "./midi";
 import type { Input, Output } from "@julusian/midi";
 import { createUiUpdater } from "./ui";
+import { start } from "repl";
 
 const debug = createDebug("8tlr-router:main");
 let mainWindow: BrowserWindow | null = null;
@@ -100,7 +107,13 @@ function startRouter() {
     observeMessage,
     uiUpdater,
   });
+  const { startDispatchingMidiMessages, stopDispatchingMidiMessages, dispatchMidiMessage } =
+    createMidiMessageDispatcher({ midiMessageHandler });
 
-  input.on("message", midiMessageHandler);
-  process.on("exit", handleExit);
+  startDispatchingMidiMessages();
+  input.on("message", dispatchMidiMessage);
+  process.on("exit", () => {
+    stopDispatchingMidiMessages();
+    handleExit();
+  });
 }

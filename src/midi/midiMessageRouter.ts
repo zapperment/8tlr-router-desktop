@@ -34,11 +34,11 @@ export function createMidiMessageRouter({ outputs, handleSketchChange }: Args): 
   const selectedOutputIndices = new Array<number>(8).fill(0);
   const shiftChannel = new Array<boolean>(8).fill(false);
 
-  return (_: number, inputMidiMessage: MidiMessage) => {
+  return (deltaTime: number, inputMidiMessage: MidiMessage) => {
     const outputMidiMessage: MidiMessage = [...inputMidiMessage];
     const inputChannel = getMidiChannel(inputMidiMessage);
     if (inputChannel > 7) {
-      loggers.other(`   ${formatMidiMessage(inputMidiMessage, "pretty")} !!! invalid channel`);
+      loggers.other(`   ${deltaTime} ${formatMidiMessage(inputMidiMessage, "pretty")} !!! invalid channel`);
       return null;
     }
 
@@ -86,10 +86,10 @@ export function createMidiMessageRouter({ outputs, handleSketchChange }: Args): 
       const leftPadding = midiMessageType === null ? leftPaddings.other : leftPaddings[midiMessageType];
       outputs[outputPortIndex].sendMessage(outputMidiMessage);
       logger(
-        `${" ".repeat(leftPadding)}${formatMidiMessage(inputMidiMessage, "pretty")} >>> ${formatMidiMessage(outputMidiMessage, "pretty")} | port: ${outputPortIndex + 1}`,
+        `${" ".repeat(leftPadding)}${deltaTime} ${formatMidiMessage(inputMidiMessage, "pretty")} >>> ${formatMidiMessage(outputMidiMessage, "pretty")} | port: ${outputPortIndex + 1}`,
       );
     } else {
-      loggers.pgm(`     ${formatMidiMessage(inputMidiMessage, "pretty")}`);
+      loggers.pgm(`     ${deltaTime} ${formatMidiMessage(inputMidiMessage, "pretty")}`);
     }
 
     return {

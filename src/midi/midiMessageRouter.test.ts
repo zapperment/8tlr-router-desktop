@@ -1,5 +1,5 @@
 import type { MidiMessage, Output } from "@julusian/midi";
-import { createMidiMessageRouter, loggers } from "./createMidiMessageRouter";
+import { createMidiMessageRouter, loggers } from "./midiMessageRouter";
 
 const outputs: Output[] = new Array(4).fill(null).map(() => ({
   sendMessage: vi.fn(),
