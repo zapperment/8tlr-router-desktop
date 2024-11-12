@@ -1,6 +1,6 @@
 import midi from "@julusian/midi";
 import type { MidiMessage, Output } from "@julusian/midi";
-import { createMidiMessageRouter, loggers } from "./createMidiMessageRouter";
+import { createMidiMessageRouter, loggers } from "./midiMessageRouter";
 
 vi.mock("@julusian/midi");
 

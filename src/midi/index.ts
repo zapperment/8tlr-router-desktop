@@ -1,6 +1,6 @@
-export { createNoteHandler } from "./createNoteHandler";
-export { createMidiMessageHandler } from "./createMidiMessageHandler";
-export { createMidiMessageRouter } from "./createMidiMessageRouter";
+export { createNoteHandler } from "./noteHandler";
+export { createMidiMessageHandler } from "./midiMessageHandler";
+export { createMidiMessageRouter } from "./midiMessageRouter";
 export { getMidiChannel } from "./getMidiChannel";
 export { getMidiMessageType } from "./getMidiMessageType";
 export { getMidiMessageTypeName } from "./getMidiMessageTypeName";
