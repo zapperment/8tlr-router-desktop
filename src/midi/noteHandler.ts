@@ -8,13 +8,16 @@ import { formatMidiMessage } from "../utils";
 
 const debug = createDebug("8tlr-router:midi:note-handler");
 
+// TODO: note updater needs to send a UiUpdate when it sends a note off!!!!111!!!
+
 interface Args {
   input: Input;
   outputs: Output[];
   isDuplicate: (midiMessage: MidiMessage) => boolean;
+  uiUpdater: (midiMessage: MidiMessage, portIndex: number) => void;
 }
 
-export function createNoteHandler({ input, outputs, isDuplicate }: Args) {
+export function createNoteHandler({ input, outputs, isDuplicate, uiUpdater }: Args) {
   const noteStatuses = new Array(4)
     .fill(null)
     .map(() => new Array(16).fill(null).map(() => new Array(128).fill(false)));
@@ -34,6 +37,7 @@ export function createNoteHandler({ input, outputs, isDuplicate }: Args) {
         const noteOff: MidiMessage = [0x90 + channelIndex, noteIndex, 0x00];
         debug(`${" ".repeat(42)}>>> ${formatMidiMessage(noteOff, "pretty")} | port: ${outputIndex + 1}`);
         outputs[outputIndex].sendMessage(noteOff);
+        uiUpdater(noteOff, outputIndex);
 
         // we are creating a MIDI message sent to the output
         // eventually, the router will receive this same MIDI message,

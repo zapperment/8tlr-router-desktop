@@ -99,13 +99,14 @@ try {
 
 function startRouter() {
   const isDuplicate = createMidiMessageDeduper();
+  const uiUpdater = createUiUpdater(mainWindow);
   const { handleExit, observeMessage, handleSketchChange } = createNoteHandler({
     input,
     outputs,
     isDuplicate,
+    uiUpdater,
   });
   const midiMessageRouter = createMidiMessageRouter({ outputs, handleSketchChange });
-  const uiUpdater = createUiUpdater(mainWindow);
   const midiMessageHandler = createMidiMessageHandler({
     midiMessageRouter,
     observeMessage,
