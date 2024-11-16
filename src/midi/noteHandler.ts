@@ -6,14 +6,15 @@ import { isNoteOff } from "./isNoteOff";
 import { getMidiChannel } from "./getMidiChannel";
 import { formatMidiMessage } from "../utils";
 
-const debug = createDebug("8tlr-router:midi:noteHandler");
+const debug = createDebug("8tlr-router:midi:note-handler");
 
 interface Args {
   input: Input;
   outputs: Output[];
+  isDuplicate: (midiMessage: MidiMessage) => boolean;
 }
 
-export function createNoteHandler({ input, outputs }: Args) {
+export function createNoteHandler({ input, outputs, isDuplicate }: Args) {
   const noteStatuses = new Array(4)
     .fill(null)
     .map(() => new Array(16).fill(null).map(() => new Array(128).fill(false)));
@@ -31,8 +32,16 @@ export function createNoteHandler({ input, outputs }: Args) {
           continue;
         }
         const noteOff: MidiMessage = [0x90 + channelIndex, noteIndex, 0x00];
-        debug(`${" ".repeat(43)}>>> ${formatMidiMessage(noteOff, "pretty")} | port: ${outputIndex + 1}`);
+        debug(`${" ".repeat(42)}>>> ${formatMidiMessage(noteOff, "pretty")} | port: ${outputIndex + 1}`);
         outputs[outputIndex].sendMessage(noteOff);
+
+        // we are creating a MIDI message sent to the output
+        // eventually, the router will receive this same MIDI message,
+        // but by then, it would be routed to the wrong output;
+        // the midiMessageDeduper makes sure this future note off
+        // message is ignored
+        isDuplicate([0x90, noteIndex, 0x00]);
+
         noteStatuses[outputIndex][channelIndex][noteIndex] = false;
       }
     },

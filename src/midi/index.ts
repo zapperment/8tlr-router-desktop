@@ -1,6 +1,7 @@
 export { createNoteHandler } from "./noteHandler";
 export { createMidiMessageHandler } from "./midiMessageHandler";
 export { createMidiMessageRouter } from "./midiMessageRouter";
+export { createMidiMessageDeduper } from "./midiMessageDeduper";
 export { getMidiChannel } from "./getMidiChannel";
 export { getMidiMessageType } from "./getMidiMessageType";
 export { getMidiMessageTypeName } from "./getMidiMessageTypeName";

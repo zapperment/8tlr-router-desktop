@@ -71,4 +71,36 @@ describe("A dedupe function", () => {
       });
     });
   });
+  describe("when it receives a MIDI note on message C4 with velocity 100", () => {
+    beforeEach(() => {
+      isDuplicate = dedupeMidiMessage([0x90, 0x3c, 0x64]);
+    });
+    it("returns false", () => {
+      expect(isDuplicate).toBeFalsy();
+    });
+    describe("followed by a note off message for the same note", () => {
+      beforeEach(() => {
+        isDuplicate = dedupeMidiMessage([0x80, 0x3c, 0x40]);
+      });
+      it("returns false", () => {
+        expect(isDuplicate).toBeFalsy();
+      });
+      describe("followed by another C4 / vel 100", () => {
+        beforeEach(() => {
+          isDuplicate = dedupeMidiMessage([0x90, 0x3c, 0x64]);
+        });
+        it("returns false", () => {
+          expect(isDuplicate).toBeFalsy();
+        });
+        describe("followed by another C4 note off", () => {
+          beforeEach(() => {
+            isDuplicate = dedupeMidiMessage([0x80, 0x3c, 0x40]);
+          });
+          it("returns false", () => {
+            expect(isDuplicate).toBeFalsy();
+          });
+        });
+      });
+    });
+  });
 });

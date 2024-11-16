@@ -4,7 +4,13 @@ import { readConfig } from "./file";
 import { configFileName } from "./constants";
 import createDebug from "debug";
 import process from "node:process";
-import { initPort, createMidiMessageRouter, createMidiMessageHandler, createNoteHandler } from "./midi";
+import {
+  initPort,
+  createMidiMessageRouter,
+  createMidiMessageHandler,
+  createNoteHandler,
+  createMidiMessageDeduper,
+} from "./midi";
 import type { Input, Output } from "@julusian/midi";
 import { createUiUpdater } from "./ui";
 
@@ -92,13 +98,19 @@ try {
 }
 
 function startRouter() {
-  const { handleExit, observeMessage, handleSketchChange } = createNoteHandler({ input, outputs });
+  const isDuplicate = createMidiMessageDeduper();
+  const { handleExit, observeMessage, handleSketchChange } = createNoteHandler({
+    input,
+    outputs,
+    isDuplicate,
+  });
   const midiMessageRouter = createMidiMessageRouter({ outputs, handleSketchChange });
   const uiUpdater = createUiUpdater(mainWindow);
   const midiMessageHandler = createMidiMessageHandler({
     midiMessageRouter,
     observeMessage,
     uiUpdater,
+    isDuplicate,
   });
 
   input.on("message", midiMessageHandler);
