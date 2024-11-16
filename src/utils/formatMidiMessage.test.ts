@@ -5,10 +5,10 @@ describe("The formatMidiMessage function", () => {
     messageDescription          | midiMessage           | format      | expected
     ${"note on"}                | ${[0x90, 0x3c, 0x64]} | ${"hex"}    | ${"90 3C 64"}
     ${"note on"}                | ${[0x90, 0x3c, 0x64]} | ${"number"} | ${"144  60 100"}
-    ${"note on"}                | ${[0x90, 0x3c, 0x64]} | ${"pretty"} | ${"[NO]  ch:  1 | note: C  4 | vel:   100"}
+    ${"note on"}                | ${[0x90, 0x3c, 0x64]} | ${"pretty"} | ${"[NO]  ch:  1 | note: C  3 | vel:   100"}
     ${"note off"}               | ${[0x90, 0x3c, 0x00]} | ${"hex"}    | ${"90 3C 00"}
     ${"note off"}               | ${[0x90, 0x3c, 0x0]}  | ${"number"} | ${"144  60   0"}
-    ${"note off"}               | ${[0x90, 0x3c, 0x00]} | ${"pretty"} | ${"[NF]  ch:  1 | note: C  4 |           "}
+    ${"note off"}               | ${[0x90, 0x3c, 0x00]} | ${"pretty"} | ${"[NF]  ch:  1 | note: C  3 |           "}
     ${"control change"}         | ${[0xb0, 0x01, 0x64]} | ${"hex"}    | ${"B0 01 64"}
     ${"control change"}         | ${[0xb0, 0x01, 0x64]} | ${"number"} | ${"176   1 100"}
     ${"control change"}         | ${[0xb0, 0x01, 0x64]} | ${"pretty"} | ${"[CC]  ch:  1 | ctrl:    1 | val:   100"}

@@ -4,10 +4,14 @@ interface Args {
   midiMessageRouter: MidiMessageRouter;
   observeMessage: (midiMessage: MidiMessage, portIndex: number) => void;
   uiUpdater: (midiMessage: MidiMessage, portIndex: number) => void;
+  isDuplicate: (midiMessage: MidiMessage) => boolean;
 }
 
-export function createMidiMessageHandler({ midiMessageRouter, observeMessage, uiUpdater }: Args) {
+export function createMidiMessageHandler({ midiMessageRouter, observeMessage, uiUpdater, isDuplicate }: Args) {
   return (deltaTime: number, midiMessage: MidiMessage) => {
+    if (isDuplicate(midiMessage)) {
+      return;
+    }
     const routingResult = midiMessageRouter(deltaTime, midiMessage);
     if (routingResult === null) {
       return;
@@ -16,7 +20,5 @@ export function createMidiMessageHandler({ midiMessageRouter, observeMessage, ui
 
     uiUpdater(outputMidiMessage, outputPortIndex);
     observeMessage(outputMidiMessage, outputPortIndex);
-
-    return routingResult;
   };
 }

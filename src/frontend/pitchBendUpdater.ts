@@ -1,4 +1,4 @@
-import { createUpdater } from "./createUpdater";
+import { createUpdater } from "./updater";
 
 export function createPitchBendUpdater() {
   return createUpdater("pb");

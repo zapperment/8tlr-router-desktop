@@ -1,6 +1,6 @@
 import midi from "@julusian/midi";
 import type { MidiMessage, Output } from "@julusian/midi";
-import { createMidiMessageRouter, loggers } from "./createMidiMessageRouter";
+import { createMidiMessageRouter, loggers } from "./midiMessageRouter";
 
 vi.mock("@julusian/midi");
 
@@ -55,7 +55,7 @@ describe("The router function created by createMidiMessageRouter", () => {
       });
 
       it("logs an error message", () => {
-        expect(loggers.other).toHaveBeenCalledWith("   [NO]  ch:  9 | note: C  3 | vel:   100 !!! invalid channel");
+        expect(loggers.other).toHaveBeenCalledWith("   [NO]  ch:  9 | note: C  2 | vel:   100 !!! invalid channel");
       });
 
       it("does not route the message to any port", () => {

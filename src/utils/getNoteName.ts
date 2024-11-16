@@ -5,7 +5,7 @@ export function getNoteName(noteNumber: number): string {
 
   const noteNames = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
   const note = noteNames[noteNumber % 12];
-  const octave = Math.floor(noteNumber / 12) - 1;
+  const octave = Math.floor(noteNumber / 12) - 2;
 
   return `${String(note).padEnd(2, " ")}${String(octave).padStart(2, " ")}`;
 }

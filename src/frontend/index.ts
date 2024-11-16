@@ -1,5 +1,5 @@
-export { createAfterTouchUpdater } from "./createAfterTouchUpdater";
-export { createControlChangeUpdater } from "./createControlChangeUpdater";
-export { createNoteUpdater } from "./createNoteUpdater";
-export { createPitchBendUpdater } from "./createPitchBendUpdater";
+export { createAfterTouchUpdater } from "./afterTouchUpdater";
+export { createControlChangeUpdater } from "./controlChangeUpdater";
+export { createNoteUpdater } from "./noteUpdater";
+export { createPitchBendUpdater } from "./pitchBendUpdater";
 export { updateSketch } from "./updateSketch";
