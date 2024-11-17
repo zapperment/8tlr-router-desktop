@@ -6,5 +6,6 @@ export function isNoteOn(message: MidiMessage) {
   if (!isNoteOnMessage) {
     return false;
   }
+  // note on with velocity 0 is considered a note off
   return message[2] !== 0x00;
 }
