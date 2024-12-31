@@ -48,7 +48,7 @@
     "email": "hello@zapperment.rocks"
   },
   "license": "MIT",
-  "packageManager": "yarn@4.5.3",
+  "packageManager": "yarn@4.6.0",
   "dependencies": {
     "@julusian/midi": "^3.6.1",
     "debug": "^4.3.7",
