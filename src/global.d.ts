@@ -17,6 +17,7 @@ interface UiUpdate {
 interface MidiMessageRouterResult {
   outputPortIndex: number;
   outputMidiMessage: MidiMessage;
+  outputIsGlobal: boolean;
 }
 
 type MidiMessageRouter = (deltaTime: number, midiMessage: MidiMessage) => MidiMessageRouterResult | null;

@@ -10,6 +10,8 @@ const outputs: Output[] = new Array(4).fill(null).map(() => new mockedMidi.Outpu
 
 const NOTE_ON_CH1_C2_V100: MidiMessage = [0x90, 0x30, 0x64];
 const NOTE_ON_CH9_C2_V100: MidiMessage = [0x98, 0x30, 0x64];
+const CC_71_CH1_V100: MidiMessage = [0xb0, 0x47, 0x64];
+const CC_71_CH9_V100: MidiMessage = [0xb8, 0x47, 0x64];
 const PROGRAM_CHANGE_2: MidiMessage = [0xc0, 0x01];
 const PROGRAM_CHANGE_3: MidiMessage = [0xc0, 0x02];
 
@@ -38,9 +40,41 @@ describe("The router function created by createMidiMessageRouter", () => {
       it("returns the correct result", () => {
         expect(result).toMatchInlineSnapshot(`
           {
+            "outputIsGlobal": false,
             "outputMidiMessage": [
               144,
               48,
+              100,
+            ],
+            "outputPortIndex": 0,
+          }
+        `);
+      });
+    });
+
+    describe("and it receives a global MIDI message", () => {
+      beforeEach(() => {
+        result = midiMessageRouter(0, CC_71_CH1_V100);
+      });
+
+      it("routes incoming MIDI messages to all the output ports", () => {
+        expect(outputs[0].sendMessage).toHaveBeenCalledWith(CC_71_CH1_V100);
+        expect(outputs[0].sendMessage).toHaveBeenCalledWith(CC_71_CH9_V100);
+        expect(outputs[1].sendMessage).toHaveBeenCalledWith(CC_71_CH1_V100);
+        expect(outputs[1].sendMessage).toHaveBeenCalledWith(CC_71_CH9_V100);
+        expect(outputs[2].sendMessage).toHaveBeenCalledWith(CC_71_CH1_V100);
+        expect(outputs[2].sendMessage).toHaveBeenCalledWith(CC_71_CH9_V100);
+        expect(outputs[3].sendMessage).toHaveBeenCalledWith(CC_71_CH1_V100);
+        expect(outputs[3].sendMessage).toHaveBeenCalledWith(CC_71_CH9_V100);
+      });
+
+      it("returns the correct result", () => {
+        expect(result).toMatchInlineSnapshot(`
+          {
+            "outputIsGlobal": true,
+            "outputMidiMessage": [
+              176,
+              71,
               100,
             ],
             "outputPortIndex": 0,
@@ -79,6 +113,7 @@ describe("The router function created by createMidiMessageRouter", () => {
     it("returns the correct result", () => {
       expect(result).toMatchInlineSnapshot(`
         {
+          "outputIsGlobal": false,
           "outputMidiMessage": [
             200,
             1,
@@ -101,6 +136,7 @@ describe("The router function created by createMidiMessageRouter", () => {
       it("returns the correct result", () => {
         expect(result).toMatchInlineSnapshot(`
           {
+            "outputIsGlobal": false,
             "outputMidiMessage": [
               152,
               48,
@@ -124,6 +160,7 @@ describe("The router function created by createMidiMessageRouter", () => {
     it("returns the correct result", () => {
       expect(result).toMatchInlineSnapshot(`
         {
+          "outputIsGlobal": false,
           "outputMidiMessage": [
             192,
             2,
@@ -142,6 +179,7 @@ describe("The router function created by createMidiMessageRouter", () => {
       it("returns the correct result", () => {
         expect(result).toMatchInlineSnapshot(`
           {
+            "outputIsGlobal": false,
             "outputMidiMessage": [
               144,
               48,
