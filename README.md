@@ -56,3 +56,51 @@ This is, unfortunately, a security measure by Apple that prevents apps downloade
 executed unless they are approved by Apple.
 
 See discussion here: https://discussions.apple.com/thread/253714860?sortBy=best
+
+## Development
+
+### Initial setup
+
+Clone this GitHub repository to your local file system.
+
+Make sure you have the Node.js version that is specifiedv in _.nvmrc_ installed.
+
+Make sure you have Yarn installed (run `corepack enable`).
+
+Install dependencies:
+
+```
+yarn
+```
+
+Set up a _8tlr-router.config.yaml_ as explained above in section [Configuration file](#configuration-file).
+
+### Running in local dev mode
+
+Run in local dev mode with this command:
+
+```
+yarn start
+```
+
+This project uses [debug](https://www.npmjs.com/package/debug) for logging debug messages. They can help you understand
+what's going on.
+
+To run with debug messages on:
+
+```
+DEBUG=* yarn start
+```
+
+To show only debug messages from the 8TLR Router program, not from third-party-packages:
+
+```
+DEBUG=8tlr-router:* yarn start
+```
+
+You can show debug messages only from a spefific logger. For example, to see only logs for control change messages that
+were sent out:
+
+```
+DEBUG=8tlr-router:midi:router:cc yarn start
+```

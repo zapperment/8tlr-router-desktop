@@ -3,7 +3,7 @@ import type { MidiMessage } from "@julusian/midi";
 interface Args {
   midiMessageRouter: MidiMessageRouter;
   observeMessage: (midiMessage: MidiMessage, portIndex: number) => void;
-  uiUpdater: (midiMessage: MidiMessage, portIndex: number) => void;
+  uiUpdater: (midiMessage: MidiMessage, portIndex: number, isGlobal: boolean) => void;
   isDuplicate: (midiMessage: MidiMessage) => boolean;
 }
 
@@ -16,9 +16,11 @@ export function createMidiMessageHandler({ midiMessageRouter, observeMessage, ui
     if (routingResult === null) {
       return;
     }
-    const { outputPortIndex, outputMidiMessage } = routingResult;
+    const { outputPortIndex, outputMidiMessage, outputIsGlobal } = routingResult;
 
-    uiUpdater(outputMidiMessage, outputPortIndex);
-    observeMessage(outputMidiMessage, outputPortIndex);
+    uiUpdater(outputMidiMessage, outputPortIndex, outputIsGlobal);
+    if (!outputIsGlobal) {
+      observeMessage(outputMidiMessage, outputPortIndex);
+    }
   };
 }

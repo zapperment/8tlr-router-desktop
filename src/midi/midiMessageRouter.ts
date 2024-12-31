@@ -4,6 +4,7 @@ import createDebug from "debug";
 import { isProgramChange } from "./isProgramChange";
 import { formatMidiMessage } from "../utils";
 import { getMidiMessageType } from "./getMidiMessageType";
+import { isGlobal } from "./isGlobal";
 
 export const loggers = {
   ["note-on"]: createDebug("8tlr-router:midi:router:note-on"),
@@ -35,6 +36,7 @@ export function createMidiMessageRouter({ outputs, handleSketchChange }: Args): 
   const shiftChannel = new Array<boolean>(8).fill(false);
 
   return (_: number, inputMidiMessage: MidiMessage) => {
+    let outputIsGlobal = false;
     const outputMidiMessage: MidiMessage = [...inputMidiMessage];
     const inputChannel = getMidiChannel(inputMidiMessage);
     if (inputChannel > 7) {
@@ -44,7 +46,7 @@ export function createMidiMessageRouter({ outputs, handleSketchChange }: Args): 
 
     const isProgramChangeMessage = isProgramChange(inputMidiMessage);
     if (isProgramChangeMessage) {
-      // send not off messages on previous sketch channel / port
+      // send note off messages on previous sketch channel / port
       handleSketchChange({
         outputIndex: selectedOutputIndices[inputChannel],
         channelIndex: shiftChannel[inputChannel] ? inputChannel + 8 : inputChannel,
@@ -81,20 +83,38 @@ export function createMidiMessageRouter({ outputs, handleSketchChange }: Args): 
     }
     const outputPortIndex = selectedOutputIndices[inputChannel];
     if (!isProgramChangeMessage) {
-      const midiMessageType = getMidiMessageType(inputMidiMessage);
+      const midiMessageType = getMidiMessageType(outputMidiMessage);
       const logger = midiMessageType === null ? loggers.other : loggers[midiMessageType];
       const leftPadding = midiMessageType === null ? leftPaddings.other : leftPaddings[midiMessageType];
-      outputs[outputPortIndex].sendMessage(outputMidiMessage);
-      logger(
-        `${" ".repeat(leftPadding)}${formatMidiMessage(inputMidiMessage, "pretty")} >>> ${formatMidiMessage(outputMidiMessage, "pretty")} | port: ${outputPortIndex + 1}`,
-      );
+      if (isGlobal(inputMidiMessage)) {
+        // send global message to all ports/channels
+        outputIsGlobal = true;
+        for (let currentOutputPortIndex = 0; currentOutputPortIndex < outputs.length; currentOutputPortIndex++) {
+          for (let addChannel = 0; addChannel <= 8; addChannel += 8) {
+            const currentMidiMessage = [...inputMidiMessage];
+            currentMidiMessage[0] += addChannel;
+            outputs[currentOutputPortIndex].sendMessage(currentMidiMessage);
+            logger(
+              `${" ".repeat(leftPadding)}${formatMidiMessage(inputMidiMessage, "pretty")} >>> ${formatMidiMessage(currentMidiMessage, "pretty")} | port: ${currentOutputPortIndex + 1}`,
+            );
+          }
+        }
+      } else {
+        // not a global message, send to port/channel for currently active sketch
+        outputs[outputPortIndex].sendMessage(outputMidiMessage);
+        logger(
+          `${" ".repeat(leftPadding)}${formatMidiMessage(inputMidiMessage, "pretty")} >>> ${formatMidiMessage(outputMidiMessage, "pretty")} | port: ${outputPortIndex + 1}`,
+        );
+      }
     } else {
       loggers.pgm(`     ${formatMidiMessage(inputMidiMessage, "pretty")}`);
     }
 
+    // TODO: how to handle output port index and MIDI message if the message is global
     return {
       outputPortIndex,
       outputMidiMessage,
+      outputIsGlobal,
     };
   };
 }
