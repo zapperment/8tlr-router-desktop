@@ -104,3 +104,39 @@ were sent out:
 ```
 DEBUG=8tlr-router:midi:router:cc yarn start
 ```
+
+### Publishing a new release
+
+All changes should be introduced to the main branch via pull request. Use “squash and merge" to merge the PR.
+
+Create a GitHub access token with _Settings_ → _Developer settings_ → _Personal access tokens_ → _Tokens (classic)_.
+
+Grant the tokens access to scopes _repo_ and _write:packages_.
+
+If you already have a token that has expired, you can use “regenerate token”.
+
+Create a _.env_ file in the local repository clone root by copying _.env.example_.
+
+Replace the bogus GitHub token in the _.env_ file with the real one.
+
+Bump the version number in _package.json_ using [semantic versioning](https://semver.org/).
+
+Commit and push the changes to the main branch using a conventional
+[commit message](https://www.conventionalcommits.org/en/v1.0.0/), e.g. `chore: release v6.6.6`.
+
+Run the _publish_ script:
+
+```
+yarn publish
+```
+
+After successfully running the _publish_ script, go to the
+[releases page on GitHub](https://github.com/zapperment/8tlr-router-desktop/releases) — there should be a new release
+draft for the version you have just published.
+
+Click on the release draft, then click on the pencil iconm (“edit”).
+
+Click on the “publish release”.
+
+You can now download the release zip file and install it on you Mac, as described above in section
+[Download and installation](#download-and-installation).
