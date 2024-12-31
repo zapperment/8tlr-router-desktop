@@ -1,7 +1,7 @@
 {
   "name": "8tlr-router-desktop",
   "productName": "Eight Track LR Router",
-  "version": "3.0.3",
+  "version": "5.0.0",
   "description": "Routes MIDI messages from Ableton Live to Reason",
   "main": ".vite/build/main.js",
   "repository": {
