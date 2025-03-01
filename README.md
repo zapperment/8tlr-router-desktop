@@ -107,7 +107,8 @@ DEBUG=8tlr-router:midi:router:cc yarn start
 
 ### Publishing a new release
 
-All changes should be introduced to the main branch via pull request. Use “squash and merge" to merge the PR.
+All changes should be introduced to the main branch via pull request. Use “squash and merge" to merge the PR. Do not
+bump the version on the PR branch, this is always done on the main branch.
 
 Create a GitHub access token with _Settings_ → _Developer settings_ → _Personal access tokens_ → _Tokens (classic)_.
 
@@ -134,7 +135,7 @@ After successfully running the _publish_ script, go to the
 [releases page on GitHub](https://github.com/zapperment/8tlr-router-desktop/releases) — there should be a new release
 draft for the version you have just published.
 
-Click on the release draft, then click on the pencil iconm (“edit”).
+Click on the release draft, then click on the pencil icon (“edit”).
 
 Click on the “publish release”.
 
